@@ -6,6 +6,10 @@ app.use(bodyParser.json());
 app.set('view engine', 'ejs');
 const PORT =process.env.PORT || 3000 ;
   
+app.get('/',(req,res)=>{
+    res.send('Hii');
+});
+
 app.listen(PORT,(err) =>{
     if(err) throw err;
     console.log('Server is running on localhost:'+PORT);
