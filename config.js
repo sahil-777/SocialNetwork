@@ -1,11 +1,19 @@
-var mysql      = require('mysql');
+var mysql = require('mysql');
 var connection = mysql.createConnection({
-  host     : 'localhost',
-  user     : 'root',
-  password : 'Pass@1234',
-  database : 'socialnetwork'
+  host: "localhost",
+  user: "root",
+  password: "Pass@1234",
+  debug: false,
+  multipleStatements: true
 });
-connection.connect(function(err){
-  if(err){console.log('Database connection failed!'); throw err};
+
+connection.connect(function(err) {
+  if (err) throw err;
+  console.log("Connected!");
+  connection.query("CREATE DATABASE IF NOT EXISTS socialnetwork; USE socialnetwork", function (err, result) {
+    if (err) throw err;
+    console.log("Database created");
+  });
 });
+
 module.exports = connection;
