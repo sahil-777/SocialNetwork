@@ -8,5 +8,5 @@ const createDatabase = () => {
     });
 };
 
-//exports.createDatabase = createDatabase;
-createDatabase();
+exports.createDatabase = createDatabase;
+exports.module=connection; 
