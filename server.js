@@ -23,16 +23,11 @@ app.post('/signup',(req,res)=>{
         "username":req.body.userName,
         "password":req.body.passWord,
         "email":req.body.email,
-        "created_at":new Date().toLocaleString().slice(0, 19).replace('T', ' ')
+        //"created_at":new Date().toLocaleString().slice(0, 19).replace('T', ' ')
+        //created_at: MySQL will take default value automatically
     };
-//  new Date().toLocaleString().slice(0, 19).replace('T', ' ')
     console.log(data);
-    
-    //date=new Date().toLocaleString().slice(0, 19).replace('T', ' ');
-    //console.log(date);
-    //connection.query('INSERT INTO users SET ?',data);
-    sql="INSERT INTO users (username, password, email, created_at) VALUES ('Company Inc', 'Highway 37','s@gmail.com',STR_TO_DATE('12/04/2016 15:30:35','%d/%m/%Y %H:%i:%s'))";
-    connection.query(sql);
+    connection.query('INSERT INTO users SET ?',data);
     res.redirect('/');
 });
 
