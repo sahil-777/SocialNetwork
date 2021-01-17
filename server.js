@@ -7,7 +7,7 @@ app.use(bodyParser.json());
 app.set('view engine', 'ejs');
 const PORT =process.env.PORT || 3000 ;
 const connection = require('./config.js');
-const createDatabase = require('./model/createDb.js');
+const temp = require('./model/createTables.js');
 
 app.get('/',(req,res)=>{
     res.send("Hello!");
@@ -25,13 +25,22 @@ app.post('/signup',(req,res)=>{
         "email":req.body.email,
         "created_at":new Date().toLocaleString().slice(0, 19).replace('T', ' ')
     };
+//  new Date().toLocaleString().slice(0, 19).replace('T', ' ')
     console.log(data);
-    connection.query('INSERT INTO users SET ?',data);
+    
+    //date=new Date().toLocaleString().slice(0, 19).replace('T', ' ');
+    //console.log(date);
+    //connection.query('INSERT INTO users SET ?',data);
+    sql="INSERT INTO users (username, password, email, created_at) VALUES ('Company Inc', 'Highway 37','s@gmail.com',STR_TO_DATE('12/04/2016 15:30:35','%d/%m/%Y %H:%i:%s'))";
+    connection.query(sql);
     res.redirect('/');
 });
 
 app.listen(PORT,(err) =>{
     if(err) throw err;
-    ('model/createDb.js').createDatabase;
+    require('./model/createDb.js').createDatabase();
+    //require('./model/createTables.js').createTables();
+    //temp.createTables();
+    //console.log(temp);
     console.log('Server is running on localhost:'+PORT);
 });
