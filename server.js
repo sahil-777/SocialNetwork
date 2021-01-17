@@ -7,7 +7,7 @@ app.use(bodyParser.json());
 app.set('view engine', 'ejs');
 const PORT =process.env.PORT || 3000 ;
 const connection = require('./config.js');
-const temp = require('./model/createTables.js');
+//const temp = require('./model/createTables.js');
 
 app.get('/',(req,res)=>{
     res.send("Hello!");
@@ -82,15 +82,13 @@ app.post('/login',(req,res)=>{
         });
 
     
-});
+}); 
 
 
 
 app.listen(PORT,(err) =>{
     if(err) throw err;
     require('./model/createDb.js').createDatabase();
-    //require('./model/createTables.js').createTables();
-    //temp.createTables();
-    //console.log(temp);
+    require('./model/createTables.js').createTables();
     console.log('Server is running on localhost:'+PORT);
 });
