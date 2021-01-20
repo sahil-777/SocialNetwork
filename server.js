@@ -18,6 +18,9 @@ app.use('/',loginRoute);
 const signupRoute=require('./routes/signupRoute');
 app.use('/',signupRoute);
 
+const profileRoute=require('./routes/profileRoute');
+app.use('/',profileRoute);
+
 app.listen(PORT,(err) =>{
     if(err) throw err;
     require('./model/createDb.js').createDatabase();
