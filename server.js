@@ -9,9 +9,6 @@ app.use(bodyParser.urlencoded({extended:true}));
 app.set('view engine', 'ejs');
 const PORT =process.env.PORT || 3000 ;
 
-app.get('/',(req,res)=>{
-    res.render('homeView');
-});
 
 const loginRoute=require('./routes/loginRoute');
 app.use('/',loginRoute);
@@ -20,6 +17,10 @@ app.use('/',signupRoute);
 
 const profileRoute=require('./routes/profileRoute');
 app.use('/',profileRoute);
+
+const homeRoute=require('./routes/homeRoute');
+app.use('/',homeRoute);
+
 
 app.listen(PORT,(err) =>{
     if(err) throw err;
