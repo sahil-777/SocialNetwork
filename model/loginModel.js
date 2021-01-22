@@ -1,6 +1,6 @@
 const connection = require('../config');
-
-class loginModel {   
+class loginModel {
+   
   enterInfo(req,res){
 
             var data ={
@@ -20,16 +20,21 @@ class loginModel {
                     const comparision = data.password==results[0].password? true:false;
                     if(comparision){
                         var msg=null;
-                       
-                        return res.render('homeView',{msg:msg});
+                        
+                        //SESSION
+                        req.session.num=results[0].id;
+                        
+                        return res.redirect('/');
                         
                     }
                     else{
+                      req.session.num=null;
                        var msg="Username and password do not match";
                        return res.render('loginView',{msg:msg});
                     }
                   }
                   else{
+                    req.session.num=null;
                     var msg="Username does not exists";
                         return res.render('loginView',{msg:msg});
                     }
