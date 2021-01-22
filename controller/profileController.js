@@ -5,7 +5,7 @@ const profileModel = new Model();
 class profileController{
     displayPage (req,res){
         //console.log(req.session.num);
-        if(req.session.num!=null){//If user has logged in
+        if(req.session.num!=null && typeof req.session.num!="undefined"){//If user has logged in
             console.log("LoggedIn "+req.session.num);
             return res.render('profileView');
         }
