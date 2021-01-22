@@ -3,7 +3,7 @@ const Model = require('../model/profileModel');
 const profileModel = new Model();
 class profileController{
     displayPage (req,res){
-        return res.render('profileView');
+     return res.render('profileView');
     }
 /*
 //Yet to be done
