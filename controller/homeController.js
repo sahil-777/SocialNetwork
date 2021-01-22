@@ -1,12 +1,18 @@
 const connection = require('../config');
 const Model = require('../model/homeModel');
 const homeModel = new Model();
-const session = require('../model/loginModel');
+
 class homeController{
     displayPage (req,res){
-        if(session.ID)
-        return res.render('homeView');
-        else return res.render('loginView',{msg:null});
+        //console.log(req.session.num);
+        if(req.session.num!=null){//If user has logged in
+            console.log("LoggedIn "+req.session.num);
+            return res.render('homeView');
+        }
+        else{ 
+            console.log("Not loggedIn "+req.session.num);
+            return res.redirect('/login');
+        }
     }
     /*
     //Yet to be done
