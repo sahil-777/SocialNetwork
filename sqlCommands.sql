@@ -15,3 +15,4 @@ CREATE TABLE IF NOT EXISTS `users` (
 INSERT INTO users (username, password, email, created_at) VALUES ('Company Inc', 'Highway 37','s@gmail.com',STR_TO_DATE('12/04/2016 15:30:35','%d/%m/%Y %H:%i:%s'));
 
 SELECT * FROM users WHERE username='SahilVelhal' AND password='dsg';
+
