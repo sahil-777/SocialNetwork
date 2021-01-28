@@ -1,8 +1,9 @@
 const express = require('express');
 const bodyParser = require('body-parser');
 const path = require('path');
+const fs = require('fs');
 var app = express();
-//app.use(express.static(__dirname + "/public")); // all statics files in /public
+app.use(express.static(__dirname + "/public")); // all statics files in /public
 app.set("views", path.join(__dirname, "views"));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({extended:true}));
