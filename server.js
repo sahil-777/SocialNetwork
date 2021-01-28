@@ -25,6 +25,8 @@ app.use('/',profileRoute);
 const homeRoute=require('./routes/homeRoute');
 app.use('/',homeRoute);
 
+const profileEditRoute=require('./routes/editProfileRoute');
+app.use('/profile',profileEditRoute);
 
 app.listen(PORT,(err) =>{
     if(err) throw err;
