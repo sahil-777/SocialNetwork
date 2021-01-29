@@ -25,9 +25,9 @@ class signupModel {
                 "id":result[0].id,
                 "username":data.username,
                 "profilepic":fs.readFileSync('./public/images/default_profilepic.png'),
-                "fullname":null,
-                "birthdate":null,
-                "bio":null
+                "fullname":'default-full-name',
+                "birthdate":'2020-02-02',
+                "bio":'default-bio'
             };
             //console.log(userData);
             //res.send(userData.profilepic);
