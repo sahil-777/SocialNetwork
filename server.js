@@ -32,19 +32,37 @@ app.use('/',homeRoute);
 const profileEditRoute=require('./routes/editProfileRoute');
 app.use('/profile',profileEditRoute);
 
+//IMP: Updated photo is not in a form as needed.
+
 app.post('/profile/edit',(req,res)=>{
     //res.send("Hii");
-    var data = {
-        "username":req.body.userName,
-        "profilepic":req.body.profilePic,
-        "fullname":req.body.name,
-        "birthdate":req.body.DOB,
-        "bio":req.body.Bio
-    };
-    res.send(data);
-    //You have to update (not insert)
-    //connection.query('INSERT INTO userinfo SET ?',data);
 
+    connection.query('SELECT * FROM userinfo WHERE id=?',req.session.num,(error,userInfoResult)=>{
+        //console.log(userInfoResult[0]);
+        var userInfo = {
+            "username":(req.body.userName=='')?userInfoResult[0].username:req.body.userName,
+            "profilepic":(req.body.profilePic=='')?userInfoResult[0].profilepic:req.body.profilePic,
+            "fullname":(req.body.fullName=='')?userInfoResult[0].fullname:req.body.fullName,
+            "birthdate":(req.body.DOB=='')?userInfoResult[0].birthdate:req.body.DOB,
+            "bio":(req.body.Bio=='')?userInfoResult[0].bio:req.body.Bio,
+            //"id":req.session.num,
+        };
+        console.log(userInfo);
+        //You have to update (not insert)
+        var sqlQuery="UPDATE userinfo SET ? WHERE id="+req.session.num;
+        connection.query(sqlQuery,userInfo,(error,result)=>{
+            if(error) throw error;
+            //console.log(result);
+            console.log(result.affectedRows+" record(s) updated");
+            res.render('editProfileView',{msg:"Saved successfully!"});
+        });
+        //res.send(userInfo);
+        
+        //res.send(userInfoResult);
+    
+    });
+    
+    
 });
 
 app.listen(PORT,(err) =>{

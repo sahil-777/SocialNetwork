@@ -1,20 +1,22 @@
 //Yet to be doneconst 
 connection = require('../config');
 
-class homeModel {
-    /*
-    //Yet to be done
+class editProfileModel {
+    
     enterInfo(req,res){
-        var data ={
-            "username":req.body.userName,
-            "password":req.body.passWord,
-            "email":req.body.email,
-            //"created_at":new Date().toLocaleString().slice(0, 19).replace('T', ' ')
-            //created_at: MySQL will take default value automatically
-        };
-        console.log(data);
-        connection.query('INSERT INTO users SET ?',data);
-    }*/
+        var userData = {
+                "id":req.session.num,
+                "username":req.body.userName,
+                "profilepic":req.body.profilePic, 
+                "fullname":req.body.fullName,
+                "birthdate":req.body.DOB,
+                "bio":req.body.Bio
+            };
+            console.log(userData);
+            //res.send(userData);
+            //res.send(userData.profilepic);
+            //connection.query('INSERT INTO userinfo SET ?',userData);
+    }
 }
 
-module.exports = homeModel;
+module.exports = editProfileModel;
