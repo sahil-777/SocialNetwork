@@ -11,7 +11,7 @@
     
 </body>
     <p><%= msg %></p>
-    <form id="editProfile" action="/profile/edit" method="POST">
+    <form id="editProfile" action="/profile/edit" method="POST" enctype="multipart/form-data">
         <label>Profile Pic</label>
         <input type="file" name="profilePic"><br><br>
         <label>Username</label>
