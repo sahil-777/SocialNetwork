@@ -24,10 +24,10 @@ class signupModel {
             var userData = {
                 "id":result[0].id,
                 "username":data.username,
-                "profilepic":fs.readFileSync('./public/images/default_profilepic.png'),
-                "fullname":'default-full-name',
-                "birthdate":'2020-02-02',
-                "bio":'default-bio'
+                "profilepic":null,
+                "fullname":null,
+                "birthdate":null,
+                "bio":null
             };
             //console.log(userData);
             //res.send(userData.profilepic);
