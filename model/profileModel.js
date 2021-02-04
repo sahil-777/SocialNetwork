@@ -1,8 +1,6 @@
 const connection = require('../config');
 
 class profileModel {
-    /*
-    //Yet to be done
     enterInfo(req,res){
         var data ={
             "username":req.body.userName,
@@ -13,7 +11,7 @@ class profileModel {
         };
         console.log(data);
         connection.query('INSERT INTO users SET ?',data);
-    }*/
+    }
 }
 
 module.exports = profileModel;

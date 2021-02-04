@@ -5,10 +5,11 @@ const profileController = new Controller();
 router.get('/profile',(req,res)=>{
     profileController.displayPage(req,res);
 });
+
 /*
-//Yet to be done
-router.post('/login',(req,res)=>{
-    loginController.enterInfo(req,res);
+NO POST METHOD FOR THIS ROUTE
+router.post('/profile',(req,res)=>{
+//    profileController.enterInfo(req,res);
 }); 
 */
 module.exports = router;
