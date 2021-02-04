@@ -8,7 +8,16 @@
 </head>
 
 <body>
-    ProfilePage!
+    <p>ProfilePage!</p>
+    <!--<p>1612436165880.png</p>
+    <p><%=imageName%></p>
+    <img src="profilepics/1612436165880.png" height="100px" width="100">-->
+
+    <img src="profilepics/<%=imageName%>" height="250px" width="250px"><br>
+    <p>username: <%=data.username%></p>
+    <p>Fullname: <%=data.fullname%></p>
+    <p>Birthdate: <%=data.birthdate%></p>
+    <p>Bio: <%=data.bio%></p>
     <form id="profileForm" action="/profile/edit" method="GET">
         <input type="submit" name="editProfile" value="Edit Profile">
     </form>
