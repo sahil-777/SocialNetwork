@@ -2,30 +2,13 @@ const express = require('express');
 const bodyParser = require('body-parser');
 const path = require('path');
 const fs = require('fs');
-const multer = require('multer'); 
 var app = express();
 
 //var upload = multer({ dest: __dirname+ '/public' });
 //console.log(upload);
 //app.use(express.static(__dirname + "/public"));
 app.use(express.static(__dirname + "/uploads" ) );
-const storage = multer.diskStorage({
-    destination: (req, file, cb) => {
-        cb(null,'uploads/profilepics/');
-    },
-    filename: (req, file, cb) => {
-        console.log(file);
-        cb(null, Date.now() + path.extname(file.originalname));
-    }
-});
-const fileFilter = (req, file, cb) => {
-    if (file.mimetype == 'image/jpeg' || file.mimetype == 'image/png') {
-        cb(null, true);
-    } else {
-        cb(null, false);
-    }
-}
-const upload = multer({ storage: storage, fileFilter: fileFilter });
+
 
 
  // all statics files in /public
@@ -58,7 +41,7 @@ app.use('/',homeRoute);
 const profileEditRoute=require('./routes/editProfileRoute');
 app.use('/profile',profileEditRoute);
 
-
+/*
 app.post('/profile/edit',upload.single('profilePic'),(req,res)=>{
     console.log(req.file);
     console.log(req.body);
@@ -83,14 +66,9 @@ app.post('/profile/edit',upload.single('profilePic'),(req,res)=>{
                 res.render('editProfileView',{msg:"Saved successfully!"});
             });
         });
-        
-    
     });
-    
-    
-    
 });
-
+*/
 app.get('/profile',(req,res)=>{
     var sql="SELECT * FROM userinfo WHERE id = "+req.session.num;
     connection.query(sql,(error,result)=>{
