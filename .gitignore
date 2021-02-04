@@ -4,4 +4,4 @@ TempLocalFiles
 .vscode
 temp.js
 views/tempView.ejs
-public/static/images/profilePics
+uploads
