@@ -12,7 +12,19 @@ CREATE TABLE IF NOT EXISTS `users` (
 ) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8;
 
 -- Demo Insert --
+/*
 INSERT INTO users (username, password, email, created_at) VALUES ('Company Inc', 'Highway 37','s@gmail.com',STR_TO_DATE('12/04/2016 15:30:35','%d/%m/%Y %H:%i:%s'));
 
 SELECT * FROM users WHERE username='SahilVelhal' AND password='dsg';
+*/
 
+CREATE TABLE IF NOT EXISTS `userinfo` (
+    `id` INT NOT NULL ,
+    `username` varchar(50) NOT NULL,
+    `profilepic` varchar(255) NULL ,
+    `fullname` VARCHAR(50) NULL,
+    `birthdate` DATE NULL,
+    `bio` VARCHAR(255) NULL,
+	  PRIMARY KEY (`id`),
+    FOREIGN KEY(`id`) REFERENCES users(id)
+)ENGINE = InnoDB AUTO_INCREMENT =2 DEFAULT CHARSET =utf8;
