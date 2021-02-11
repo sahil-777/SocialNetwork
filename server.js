@@ -47,10 +47,20 @@ app.post('/profile/postFeed',(req,res)=>{
         if(err) {
             return res.end("Error uploading file.");
         }
+        console.log(req.file);
+
+        let feedData={
+            "userid":req.session.num,
+            "feedname":req.file.filename,   
+        }//Everything else is bydefault i.e. created_at,likes,id
+
+        let sql="INSERT INTO userfeed SET ?";
+        connection.query(sql,feedData);
+
         res.end("File is uploaded");
     });
-});
- 
+}); 
+  
  
 app.listen(PORT,(err) =>{
     if(err) throw err;
