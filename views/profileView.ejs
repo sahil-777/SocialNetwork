@@ -33,10 +33,10 @@
 <body>
     <p>ProfilePage!</p>
     <!--<p>1612436165880.png</p>
-    <p><%=imageName%></p>
+    <p><%=dpName%></p>
     <img src="profilepics/1612436165880.png" height="100px" width="100">-->
 
-    <img src="profilepics/<%=imageName%>" height="250px" width="250px"><br>
+    <img src="profilepics/<%=dpName%>" height="250px" width="250px"><br>
     <p>username: <%=data.username%></p>
     <p>Fullname: <%=data.fullname%></p>
     <p>Birthdate: <%=data.birthdate%></p>
@@ -51,7 +51,11 @@
         <input type="submit" id="uploadFeed" name="Upload" />
         <span id = "status"></span>
     </form>
-
+    
+    <% for(var i=0; i < feedResult.length; i++) { %>
+        <img onclick="alert('Hii')"  src="profilepics/<%=feedResult[i].feedname%>" height="250px" width="250px">
+        &nbsp;&nbsp;&nbsp;&nbsp;
+    <% } %>
     
     
 </body>
