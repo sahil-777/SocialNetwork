@@ -55,7 +55,7 @@ app.post('/profile/postFeed',(req,res)=>{
         }//Everything else is bydefault i.e. created_at,likes,id
 
         let sql="INSERT INTO userfeed SET ?";
-        connection.query(sql,feedData);
+        connection.query(sql,feedData); 
 
         res.end("File is uploaded");
     });

@@ -27,10 +27,23 @@
             //Very important line, it disables the page refresh.
             return false;
             });
+
+            //===============================
+            //showPost
+            $("#showPost").click(function(){
+                //$("main").hide();
+                
+
+            });
+
+
+
+
         });    
     </script>
 </head>
 <body>
+    <main>
     <p>ProfilePage!</p>
     <!--<p>1612436165880.png</p>
     <p><%=dpName%></p>
@@ -52,11 +65,14 @@
         <span id = "status"></span>
     </form>
     
+    <div id="showPost">
     <% for(var i=0; i < feedResult.length; i++) { %>
-        <img onclick="alert('Hii')"  src="profilepics/<%=feedResult[i].feedname%>" height="250px" width="250px">
+        <img src="profilepics/<%=feedResult[i].feedname%>" height="250px" width="250px">
         &nbsp;&nbsp;&nbsp;&nbsp;
     <% } %>
-    
+    </div>
+
+</main>
     
 </body>
 
