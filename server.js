@@ -8,6 +8,7 @@ var app = express();
 //console.log(upload);
 //app.use(express.static(__dirname + "/public"));
 app.use(express.static(__dirname + "/uploads" ) );
+const upload=require('./middleware/multerSetup');
 
 
 
@@ -41,6 +42,12 @@ app.use('/',homeRoute);
 const profileEditRoute=require('./routes/editProfileRoute');
 app.use('/profile',profileEditRoute);
 
+app.post('/profile/postFeed',upload.single("uplodFile"),(req,res,error)=>{
+    if(error){
+        return res.end("Error uploading file.");
+    }
+    res.end("File is uploaded");
+});
  
  
 app.listen(PORT,(err) =>{
