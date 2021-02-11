@@ -5,8 +5,33 @@
     <title>
         Profile
     </title>
-</head>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="http://cdnjs.cloudflare.com/ajax/libs/jquery.form/3.51/jquery.form.min.js"></script>
+    <script>
+        $(document).ready(function(){
+            $("#uploadFeedButton").click(function(){
+                $("#uploadFeedForm").toggle();
+            });
+            
+            $('#uploadFeedForm').submit(function() {
+            $("#status").empty().text("File is uploading...");
+            $(this).ajaxSubmit({
 
+                error: function(xhr) {
+                status('Error: ' + xhr.status);
+                },
+
+                success: function(response) {
+                $("#status").empty().text(response);
+                    console.log(response);
+                }
+            });
+            //Very important line, it disables the page refresh.
+            return false;
+            });
+        });    
+    </script>
+</head>
 <body>
     <p>ProfilePage!</p>
     <!--<p>1612436165880.png</p>
@@ -20,6 +45,13 @@
     <p>Bio: <%=data.bio%></p>
     <form id="profileForm" action="/profile/edit" method="GET">
         <input type="submit" name="editProfile" value="Edit Profile">
+    </form><br>
+
+    <button id="uploadFeedButton">Upload Feed</button><br><br>
+    <form id="uploadFeedForm" hidden action="/profile/post" method="POST" enctype="multipart/form-data">
+        <input id="uploadFile" type="file" name="uploadFile" value="Upload File" />
+        <input type="submit" id="uploadFeed" name="Upload" />
+        <span id = "status"></span>
     </form>
     
 </body>
