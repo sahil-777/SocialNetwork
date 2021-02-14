@@ -48,7 +48,20 @@
 
             //Like,Comment
             $('#likeImage').click(function(){
-                alert('Hii');
+                //alert('Hii'); 
+                $.ajax({
+                    url: "/profile/postFeed/"+id+"/likes", 
+                    type:"POST",
+                    timeout:500,
+                    //dataType:'json',
+                    success: function(){
+                        //
+                        alert('Liked!');
+                    },
+                    error:function(error){
+                        throw error;
+                    }
+                });
             });
 
             //alert(id);

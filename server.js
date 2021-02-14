@@ -60,6 +60,17 @@ app.post('/profile/postFeed',(req,res)=>{
         res.end("File is uploaded");
     });
 }); 
+
+app.post('/profile/postFeed/:id/likes',(req,res)=>{
+    //console.log(req.url);
+    let sqlQuery="UPDATE userfeed SET likes=likes+1 WHERE feedname='"+req.params['id']+"'";
+    //console.log('likkkkee');
+    connection.query(sqlQuery,(error,result)=>{
+        if(error) throw error;
+    });
+    //console.log(sqlQuery);
+    console.log("liked Post: "+req.params['id']);
+});
   
  
 app.listen(PORT,(err) =>{
