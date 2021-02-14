@@ -30,20 +30,38 @@
 
             //===============================
             //showPost
-            $("#showPost").click(function(){
-                //$("main").hide();
-                
+            /*$('#wideImage').click(function(){
+                let id=$(this).attr('id');
+                alert(id);
+            });*/
 
+            
+
+
+        });  
+        
+        
+        function showFeed(id){
+            $('#one').toggle();
+            $('#two').toggle();
+            $('#wideImage').attr('src',"profilepics/"+id);
+
+            //Like,Comment
+            $('#likeImage').click(function(){
+                alert('Hii');
             });
 
+            //alert(id);
+        }
 
+         
 
-
-        });    
+         
+  
     </script>
 </head>
 <body>
-    <main>
+    <main id="one">
     <p>ProfilePage!</p>
     <!--<p>1612436165880.png</p>
     <p><%=dpName%></p>
@@ -67,12 +85,23 @@
     
     <div id="showPost">
     <% for(var i=0; i < feedResult.length; i++) { %>
-        <img src="profilepics/<%=feedResult[i].feedname%>" height="250px" width="250px">
+        <img id="<%=feedResult[i].feedname%>" onclick="showFeed(this.id)"  src="profilepics/<%=feedResult[i].feedname%>" height="250px" width="250px">
         &nbsp;&nbsp;&nbsp;&nbsp;
     <% } %>
     </div>
 
-</main>
+    </main>
+
+    <main id="two" hidden>
+        <p>Hii</p>
+        <button id="close" onclick="showFeed(this.id)">Close</button><br><br>
+
+        <img id="wideImage" height="250px" width="250px"><br><br>
+        <button id="likeImage">Like</button> <button id="commentImage">Comment</button> 
+
+    </main>
+
+
     
 </body>
 
