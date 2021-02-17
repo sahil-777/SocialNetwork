@@ -63,6 +63,8 @@ app.post('/profile/postFeed',(req,res)=>{
 
 app.post('/profile/postFeed/:id/likes',(req,res)=>{
     //console.log(req.url);
+    if(req.params['id']=='close')
+    return;
     let sqlQuery="UPDATE userfeed SET likes=likes+1 WHERE feedname='"+req.params['id']+"'";
     //console.log('likkkkee');
     connection.query(sqlQuery,(error,result)=>{

@@ -42,8 +42,7 @@
         
         
         function showFeed(id){
-            $('#one').toggle();
-            $('#two').toggle();
+            toggler();
             $('#wideImage').attr('src',"profilepics/"+id);
 
             //Like,Comment
@@ -65,6 +64,11 @@
             });
 
             //alert(id);
+        }
+
+        function toggler(){
+            $('#one').toggle();
+            $('#two').toggle();
         }
 
          
@@ -105,14 +109,14 @@
 
     </main>
 
-    <main id="two" hidden>
+    <div id="two" hidden>
         <p>Hii</p>
-        <button id="close" onclick="showFeed(this.id)">Close</button><br><br>
+        <button id="close" onclick="toggler()">Close</button><br><br>
 
         <img id="wideImage" height="250px" width="250px"><br><br>
         <button id="likeImage">Like</button> <button id="commentImage">Comment</button> 
 
-    </main>
+    </div>
 
 
     
