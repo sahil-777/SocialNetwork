@@ -18,7 +18,14 @@ class profileController{
                 let feedQuery="SELECT * FROM userfeed WHERE userid = "+req.session.num; 
                 connection.query(feedQuery,(error,feedResult)=>{
                     console.log(feedResult);
-                    return res.render('profileView',{data:result[0],dpName:imageName,feedResult:feedResult});
+                    
+                    let likeQuery="SELECT DISTINCT feedname FROM likeinfo WHERE likedby="+req.session.num;
+                    console.log(likeQuery);
+                    connection.query(likeQuery,(error,likeResult)=>{
+                        if(error) throw error;
+                        console.log(likeResult);
+                        return res.render('profileView',{data:result[0],dpName:imageName,feedResult:feedResult,likeResult:likeResult});
+                    });
                 })
             });
         }

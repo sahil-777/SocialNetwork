@@ -61,17 +61,40 @@ app.post('/profile/postFeed',(req,res)=>{
     });
 }); 
 
-app.post('/profile/postFeed/:id/likes',(req,res)=>{
+app.post('/profile/postFeed/:id/:flag',(req,res)=>{
     //console.log(req.url);
-    if(req.params['id']=='close')
-    return;
-    let sqlQuery="UPDATE userfeed SET likes=likes+1 WHERE feedname='"+req.params['id']+"'";
+    let val='';
+    if(req.params['flag']==1)
+    val="+1";
+    else val="-1"; 
+    let sqlQuery="UPDATE userfeed SET likes=likes"+val+" WHERE feedname='"+req.params['id']+"'";
     //console.log('likkkkee');
     connection.query(sqlQuery,(error,result)=>{
+        //console.log(result[0]);
         if(error) throw error;
     });
+    let likeData={
+        feedname:req.params['id'],//id=>feedname
+        likedby:req.session.num
+    }
+    if(req.params['flag']==1)
+    sqlQuery="INSERT INTO likeinfo SET ? ";
+    else
+    sqlQuery="DELETE FROM likeinfo WHERE (feedname= '"+likeData.feedname+ "' AND likedby= '"+likeData.likedby+"')";
+    
     //console.log(sqlQuery);
+    connection.query(sqlQuery,likeData,(error,result)=>{
+        if(error) throw error;
+        console.log(sqlQuery);
+    });
+    //console.log(sqlQuery);
+    if(req.params['flag']==1)
     console.log("liked Post: "+req.params['id']);
+    else
+    console.log("disliked Post: "+req.params['id']);
+    
+   //console.log(sqlQuery);
+
 });
   
  
