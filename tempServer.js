@@ -40,7 +40,6 @@ const homeRoute=require('./routes/homeRoute');
 app.use('/',homeRoute);
 
 const profileEditRoute=require('./routes/editProfileRoute');
-const { stringify } = require('querystring');
 app.use('/profile',profileEditRoute);
 
 app.post('/profile/postFeed',(req,res)=>{
@@ -61,25 +60,6 @@ app.post('/profile/postFeed',(req,res)=>{
         res.end("File is uploaded");
     });
 }); 
-
-app.get('/showfeed/:id',(req,res)=>{
-    console.log(req.params['id']);
-    let sqlQuery="SELECT EXISTS(SELECT 1 FROM likeinfo WHERE (feedname = '"+req.params['id']+"' AND likedby = '"+req.session.num+"') LIMIT 1)"
-    //console.log(sqlQuery);
-    connection.query(sqlQuery,(error,result,field)=>{
-        if(error) throw error; 
-        result=JSON.stringify(result);
-        console.log(result);
-        
-        var initialLikedDisliked="like";
-        if(result[result.length-3]=='1')
-            initialLikedDisliked="dislike";
-        
-        console.log(initialLikedDisliked);
-        return res.render('showFeedView',{postId:req.params['id'],initialLikedDisliked:initialLikedDisliked});  
-    });
-    //res.send(html); 
-});
 
 app.post('/profile/postFeed/:id/:flag',(req,res)=>{
     //console.log(req.url);

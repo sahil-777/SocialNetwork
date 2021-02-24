@@ -20,10 +20,10 @@ class profileController{
                     console.log(feedResult);
                     
                     let likeQuery="SELECT DISTINCT feedname FROM likeinfo WHERE likedby="+req.session.num;
-                    console.log(likeQuery);
+                    //console.log(likeQuery);
                     connection.query(likeQuery,(error,likeResult)=>{
                         if(error) throw error;
-                        console.log(likeResult);
+                        //console.log(likeResult);
                         return res.render('profileView',{data:result[0],dpName:imageName,feedResult:feedResult,likeResult:likeResult});
                     });
                 })

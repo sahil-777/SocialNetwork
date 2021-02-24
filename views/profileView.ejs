@@ -27,58 +27,18 @@
             //Very important line, it disables the page refresh.
             return false;
             });
-            //===============================
-            //showPost
-            /*$('#wideImage').click(function(){
-                let id=$(this).attr('id');
-                alert(id);
-            });*/
-            
         });  
-        
-        
+
         function showFeed(id){
-            toggler(1);
-            $('#wideImage').attr('src',"profilepics/"+id);
-            //Like,Comment
-            $('#likeImage').click(function(){
-                //alert('Hii');
-                let flag=1;
-                if($('#likeImage').val()=='dislike')
-                flag=0;
-                toggler(2); //Call toggler after setting flag
-                $.ajax({
-                    url: "/profile/postFeed/"+id+"/"+flag, 
-                    type:"POST",
-                    timeout:500,
-                    //dataType:'json',
-                    success: function(){
-                        //
-                        alert('Liked!');
-                    },
-                    error:function(error){
-                        throw error;
-                    }
-                });
-            });
-            //alert(id);
+            window.location='/showfeed/'+id;
+            return false;
         }
-        function toggler(option){
-            if(option==1){
-            $('#one').toggle();
-            $('#two').toggle();
-            }
-            else if(option==2){
-                if($('#likeImage').val()=='like'){
-                    //$('#likeImage').html('dislike');
-                    $('#likeImage').attr('value',"dislike");
-                }
-                else{
-                    //$('#likeImage').html('like');
-                    $('#likeImage').attr('value',"like");
-                }
-            }
-        }
+
+        
+          
+        
+         
+        
          
          
   
@@ -109,24 +69,14 @@
     
     <div id="showPost">
     <% for(var i=0; i < feedResult.length; i++) { %>
-        <img id="<%=feedResult[i].feedname%>" onclick="showFeed(this.id)"  src="profilepics/<%=feedResult[i].feedname%>" height="250px" width="250px">
+        <img id="<%=feedResult[i].feedname%>" onclick="showFeed(this.id);return false;"  src="profilepics/<%=feedResult[i].feedname%>" height="250px" width="250px">
         &nbsp;&nbsp;&nbsp;&nbsp;
     <% } %>
     </div>
 
     </main>
 
-    <div id="two" hidden>
-        <p>Hii</p>
-        <button id="close" onclick="toggler(1)">Close</button><br><br>
-
-        <img id="wideImage" height="250px" width="250px"><br><br>
-        <!--<button id="likeImage" value="like">like</button> 
-        -->
-        <input type="button" id="likeImage" value="like" name="likeImage"/>
-        <button id="commentImage">Comment</button> 
-
-    </div>
+     
 
 
     

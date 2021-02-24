@@ -1,0 +1,60 @@
+<!doctype html>
+<html lang="en">
+<head>
+        <meta charset="utf-8">
+    <title>
+        Initial Template
+    </title>
+</head>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script src="http://cdnjs.cloudflare.com/ajax/libs/jquery.form/3.51/jquery.form.min.js"></script>
+<script>
+    $(document).ready(function(){
+        $('#likeImage').click(function(){
+                //alert('Hii');
+                let flag=1;  
+                if($('#likeImage').val()=='dislike')
+                flag=0;
+
+
+                if($('#likeImage').val()=='like'){
+                    //$('#likeImage').html('dislike');
+                    $('#likeImage').attr('value',"dislike");
+                }
+                else{
+                    //$('#likeImage').html('like');
+                    $('#likeImage').attr('value',"like");
+                }
+                $.ajax({
+                    url: "/profile/postFeed/"+"<%=postId%>"+"/"+flag, 
+                    type:"POST",
+                    timeout:500,
+                    //dataType:'json',
+                    success: function(){
+                        //
+                        alert('Liked!');
+                    },
+                    error:function(error){
+                        throw error;
+                    }
+                });
+            });
+        });
+
+      
+</script>
+
+
+<body>
+    <img src="/profilepics/<%=postId%>" height="250px" width="250px"><br>
+    <form action="/profile" method="GET">
+        <input type="submit" value="close">
+    </form><br><br>
+
+    <input type="button" id="likeImage" value="<%=initialLikedDisliked%>" name="likeImage"/>
+    <button id="commentImage">Comment</button>
+
+
+</body>
+
+</html>
