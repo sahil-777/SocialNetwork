@@ -69,14 +69,19 @@ app.get('/showfeed/:id',(req,res)=>{
     connection.query(sqlQuery,(error,result,field)=>{
         if(error) throw error; 
         result=JSON.stringify(result);
-        console.log(result);
+        //console.log(result);
         
         var initialLikedDisliked="like";
         if(result[result.length-3]=='1')
             initialLikedDisliked="dislike";
         
         console.log(initialLikedDisliked);
-        return res.render('showFeedView',{postId:req.params['id'],initialLikedDisliked:initialLikedDisliked});  
+        let sqlQuery1="SELECT * FROM commentinfo WHERE feedname='"+req.params['id']+"'";
+        connection.query(sqlQuery1,(error,comments)=>{
+            if(error) throw error;
+            //console.log(JSON.stringify(comments));
+            return res.render('showFeedView',{postId:req.params['id'],initialLikedDisliked:initialLikedDisliked,comments:comments});  
+        });
     });
     //res.send(html); 
 });
@@ -130,7 +135,7 @@ app.post('/profile/postFeed/:id/comment',(req,res)=>{
         "commentby":req.session.num,
         "commentto":0
     }
-    console.log(JSON.stringify(commentData));
+    //console.log(JSON.stringify(commentData));
     let sqlQuery="INSERT INTO commentinfo SET ? ";
     connection.query(sqlQuery,commentData,(error,result)=>{
         if(error) throw error;
