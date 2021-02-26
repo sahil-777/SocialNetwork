@@ -26,7 +26,7 @@
                     $('#likeImage').attr('value',"like");
                 }
                 $.ajax({
-                    url: "/profile/postFeed/"+"<%=postId%>"+"/"+flag, 
+                    url: "/profile/postFeed/"+"<%=postId%>"+"/likeImage/"+flag, 
                     type:"POST",
                     timeout:500,
                     //dataType:'json',
@@ -37,6 +37,25 @@
                     error:function(error){
                         throw error;
                     }
+                });
+            });
+
+            $('#commentImage').click(function(){
+                $('#commentSection').toggle();
+                
+                $('#postCommentForm').submit(function() {
+                //$("#status").empty().text("File is uploading...");
+                $(this).ajaxSubmit({
+                    error: function(xhr) {
+                    status('Error: ' + xhr.status);
+                    },
+                    success: function(response) {
+                    $("#status").empty().text(response);
+                        console.log(response);
+                    }
+                });
+                //Very important line, it disables the page refresh.
+                return false;
                 });
             });
         });
@@ -53,6 +72,16 @@
 
     <input type="button" id="likeImage" value="<%=initialLikedDisliked%>" name="likeImage"/>
     <button id="commentImage">Comment</button>
+    <div id="commentSection" hidden>
+        <form id="postCommentForm" action="/profile/postFeed/<%=postId%>/comment" method="POST" >
+            <input type="text" name="commentText" placeholder="Comment here...">
+            <input type="submit" name="postComment" value="Post">
+        </form>
+    </div>
+
+    <div id="loadComments">
+        
+    </div>
 
 
 </body>

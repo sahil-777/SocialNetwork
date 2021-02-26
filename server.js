@@ -81,10 +81,12 @@ app.get('/showfeed/:id',(req,res)=>{
     //res.send(html); 
 });
 
-app.post('/profile/postFeed/:id/:flag',(req,res)=>{
+app.post('/profile/postFeed/:id/likeImage/:likeflag',(req,res)=>{
     //console.log(req.url);
+    //if(req.params['likeflag']=='comment')
+    //return res.redirect('/profile/postFeed/'+req.params['id']+'/comment');
     let val='';
-    if(req.params['flag']==1)
+    if(req.params['likeflag']==1)
     val="+1";
     else val="-1"; 
     let sqlQuery="UPDATE userfeed SET likes=likes"+val+" WHERE feedname='"+req.params['id']+"'";
@@ -97,7 +99,7 @@ app.post('/profile/postFeed/:id/:flag',(req,res)=>{
         feedname:req.params['id'],//id=>feedname
         likedby:req.session.num
     }
-    if(req.params['flag']==1)
+    if(req.params['likeflag']==1)
     sqlQuery="INSERT INTO likeinfo SET ? ";
     else
     sqlQuery="DELETE FROM likeinfo WHERE (feedname= '"+likeData.feedname+ "' AND likedby= '"+likeData.likedby+"')";
@@ -108,13 +110,33 @@ app.post('/profile/postFeed/:id/:flag',(req,res)=>{
         //console.log(sqlQuery);
     });
     //console.log(sqlQuery);
-    if(req.params['flag']==1)
+    if(req.params['likeflag']==1)
     console.log("liked Post: "+req.params['id']);
     else
     console.log("disliked Post: "+req.params['id']);
     
    //console.log(sqlQuery);
 
+});
+
+app.get('/profile/postFeed/:id/comment',(req,res)=>{
+    console.log('G-Comment');
+    //console.log(req);
+});
+app.post('/profile/postFeed/:id/comment',(req,res)=>{
+    let commentData={
+        "feedname":req.params['id'],
+        "commenttext":req.body.commentText,
+        "commentby":req.session.num,
+        "commentto":0
+    }
+    console.log(JSON.stringify(commentData));
+    let sqlQuery="INSERT INTO commentinfo SET ? ";
+    connection.query(sqlQuery,commentData,(error,result)=>{
+        if(error) throw error;
+    });
+
+    
 });
   
  
