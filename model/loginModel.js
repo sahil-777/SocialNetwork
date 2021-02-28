@@ -23,18 +23,20 @@ class loginModel {
                         
                         //SESSION
                         req.session.num=results[0].id;
-                        
+                        req.session.username=data.username;
                         return res.redirect('/');
                         
                     }
                     else{
                       req.session.num=null;
+                      req.session.username=null;
                        var msg="Username and password do not match";
                        return res.render('loginView',{msg:msg});
                     }
                   }
                   else{
                     req.session.num=null;
+                    req.session.username=null;
                     var msg="Username does not exists";
                         return res.render('loginView',{msg:msg});
                     }

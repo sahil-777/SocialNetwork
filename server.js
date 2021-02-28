@@ -22,10 +22,10 @@ const PORT = process.env.PORT;
 
 //Database
 const connection = require('./config');
-
+ 
 //SESSION
 const session = require('express-session');
-app.use(session({secret: 'Secreyyyy', resave: true, saveUninitialized: true})) 
+app.use(session({secret:process.env.SESSION_KEY, resave: true, saveUninitialized: true})) 
 module.exports.session = session; //Unnecessary
 
 const loginRoute=require('./routes/loginRoute');
@@ -80,7 +80,8 @@ app.get('/showfeed/:id',(req,res)=>{
         let sqlQuery1="SELECT * FROM commentinfo WHERE feedname='"+req.params['id']+"'";
         connection.query(sqlQuery1,(error,comments)=>{
             if(error) throw error;
-            //console.log(JSON.stringify(comments));
+            for(let i=0;i<comments.length;i++)
+            comments[i].commentby=req.session.username;
             return res.render('showFeedView',{postId:req.params['id'],initialLikedDisliked:initialLikedDisliked,comments:comments});  
         });
     });

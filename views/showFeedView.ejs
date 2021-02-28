@@ -43,9 +43,10 @@
             $('#commentImage').click(function(){
                 $('#commentSection').toggle();
                 $('#loadComments').toggle();
-                if('<%= comments.length%>' > 3){
+                /*if('<%= comments.length%>' > 3){
+                    //alert('<%= comments.length%>');
                     $('#loadNextComments').toggle();
-                }
+                }*/
                 $('#postCommentForm').submit(function() {
                 //$("#status").empty().text("File is uploading...");
                 $(this).ajaxSubmit({
@@ -83,8 +84,10 @@
     </div>
 
     <div id="loadComments" hidden>
-        <% for (let i=0;i< Math.min(comments.length,3) ;i++) { %>
-            <p><%= comments[i].commenttext %></p>
+        <% for (let i=0;i< comments.length ;i++) { %>
+
+            <p><%= comments[i].commentby %><br>
+                <%= comments[i].commenttext %></p>
         <% } %>
     </div>
     <button id="loadNextComments" hidden>Load next three Comments</button>
