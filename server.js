@@ -3,7 +3,8 @@ const bodyParser = require('body-parser');
 const path = require('path');
 const fs = require('fs');
 var app = express();
-
+const dotenv =require('dotenv');
+dotenv.config();
 //var upload = multer({ dest: __dirname+ '/public' });
 //console.log(upload);
 //app.use(express.static(__dirname + "/public"));
@@ -17,7 +18,7 @@ app.set("views", path.join(__dirname, "views"));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({extended:true}));
 app.set('view engine', 'ejs');
-const PORT = process.env.PORT || 3000 ;
+const PORT = process.env.PORT;
 
 //Database
 const connection = require('./config');
