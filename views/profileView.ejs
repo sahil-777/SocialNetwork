@@ -60,6 +60,10 @@
         <input type="submit" name="editProfile" value="Edit Profile">
     </form><br>
 
+    <form id="homeButton" action="/" method="GET">
+        <input type="submit" name="homePage" value="Home">
+    </form><br>
+
     <button id="uploadFeedButton">Upload Feed</button><br><br>
     <form id="uploadFeedForm" hidden action="/profile/postFeed" method="POST" enctype="multipart/form-data">
         <input id="uploadFile" type="file" name="userFeed" value="Upload File" />
