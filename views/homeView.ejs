@@ -1,13 +1,42 @@
-<!doctype html>
-<html lang="en">
+<!DOCTYPE html>
+ 
 <head>
-        <meta charset="utf-8">
-    <title>
-        Home
-    </title>
+<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+<script  type="text/javascript" src="../JS/typeahead.min.js"></script>
+<script type="text/javascript">
+$(document).ready(function(){
+    $('input.typeahead').typeahead({
+        name: 'countries',
+        remote: 'http://localhost:3000/profile/search?key=%QUERY',
+        limit: 10
+    });
+});
+</script>
 </head>
-
 <body>
+    HomePage!
+    <form id="homeForm" action="/login" method="GET">
+        <input type="submit" value="Logout">  
+    </form>
+    <br>
+    <form id="homeForm" action="/profile" method="GET">
+        <input type="submit" value="Profile">
+    </form>
+    <br><br>
+
+    <form id="search-user-form" method="GET" action="/profile">
+        <input type="text" id="search-text" class="typeahead tt-query" name="typeahead" autocomplete="off" spellcheck="false" placeholder="Type your Query">
+        <input type="submit" name="searchUser" id="search-user" value="search"> 
+    </form>
+    
+    
+    
+</body>
+</html>
+
+
+
+<!--
     HomePage!
     <form id="homeForm" action="/login" method="GET">
         <input type="submit" value="Logout">  
@@ -16,6 +45,4 @@
     <form id="homeForm" action="/profile" method="GET">
         <input type="submit" value="Profile">
     </form>
-</body>
-
-</html>
+-->

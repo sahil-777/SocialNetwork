@@ -11,7 +11,22 @@ dotenv.config();
 app.use(express.static(__dirname + "/uploads" ) );
 const upload=require('./middleware/multerSetup').single("uploadFile");
 
-
+app.get('/search',function(req,res){
+    res.render('tempView');
+});
+    
+app.get('/search',function(req,res){
+    connection.query('SELECT username from users where username like "%'+req.query.key+'%"',
+    function(err, rows, fields) {
+    if (err) throw err;
+    var data=[];
+    for(i=0;i<rows.length;i++)
+    {
+    data.push(rows[i].first_name);
+    }
+    res.end(JSON.stringify(data));
+    });
+});
 
  // all statics files in /public
 app.set("views", path.join(__dirname, "views"));
@@ -47,7 +62,24 @@ app.use('/profile',profileEditRoute);
 const showFeedRoute=require('./routes/showFeedRoute');
 app.use('/',showFeedRoute);
 
-  
+
+app.get('/profile/search',function(req,res){
+    //console.log(req.query.key);
+    connection.query('SELECT username from users where username like "%'+req.query.key+'%"', function(err, rows, fields) {
+          if (err) throw err;
+        var data=[];
+        for(i=0;i<rows.length;i++)
+          {
+            data.push(rows[i].username);
+          }
+          res.end(JSON.stringify(data));
+        });
+        
+    //	return false;
+});
+
+
+
  
 app.listen(PORT,(err) =>{
     if(err) throw err;
