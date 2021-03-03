@@ -39,6 +39,23 @@ class profileController{
         profileModel.enterInfo(req,res);
         //console.log("contMsg=> "+msg);
     } 
+
+    uploadFeed(req,res) {
+        /*if(err) {
+            return res.end("Error uploading file.");
+        }*/
+        //console.log(req.file);
+
+        let feedData={
+            "userid":req.session.num,
+            "feedname":req.file.filename,   
+        }//Everything else is bydefault i.e. created_at,likes,id
+        //console.log(feedData);
+        let sql="INSERT INTO userfeed SET ?";
+        connection.query(sql,feedData); 
+        
+        res.end("File is uploaded");
+    };
 }
 module.exports = profileController;
 

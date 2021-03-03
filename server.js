@@ -44,25 +44,6 @@ const profileEditRoute=require('./routes/editProfileRoute');
 const { stringify } = require('querystring');
 app.use('/profile',profileEditRoute);
 
-app.post('/profile/postFeed',(req,res)=>{
-    upload(req,res,function(err) {
-        if(err) {
-            return res.end("Error uploading file.");
-        }
-        console.log(req.file);
-
-        let feedData={
-            "userid":req.session.num,
-            "feedname":req.file.filename,   
-        }//Everything else is bydefault i.e. created_at,likes,id
-
-        let sql="INSERT INTO userfeed SET ?";
-        connection.query(sql,feedData); 
-
-        res.end("File is uploaded");
-    });
-}); 
-
 app.get('/showfeed/:id',(req,res)=>{
     console.log(req.params['id']);
     let sqlQuery="SELECT EXISTS(SELECT 1 FROM likeinfo WHERE (feedname = '"+req.params['id']+"' AND likedby = '"+req.session.num+"') LIMIT 1)"
