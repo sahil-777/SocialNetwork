@@ -115,8 +115,8 @@ app.post('/profile/postFeed/:id/likeImage/:likeflag',(req,res)=>{
     connection.query(sqlQuery,likeData,(error,result)=>{
         if(error) throw error;
         //console.log(sqlQuery);
-    });
-    //console.log(sqlQuery);
+    });  
+    //console.log(sqlQuery);    
     if(req.params['likeflag']==1)
     console.log("liked Post: "+req.params['id']);
     else
