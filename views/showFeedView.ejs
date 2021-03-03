@@ -78,7 +78,7 @@
     <button id="commentImage">Comment</button>
     <div id="commentSection" hidden>
         <form id="postCommentForm" action="/profile/postFeed/<%=postId%>/comment" method="POST" >
-            <input type="text" name="commentText" placeholder="Comment here...">
+            <input type="text" autocomplete="off" name="commentText" placeholder="Comment here...">
             <input type="submit" name="postComment" value="Post">
         </form>
     </div>
