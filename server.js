@@ -11,23 +11,7 @@ dotenv.config();
 app.use(express.static(__dirname + "/uploads" ) );
 const upload=require('./middleware/multerSetup').single("uploadFile");
 
-app.get('/search',function(req,res){
-    res.render('tempView');
-});
     
-app.get('/search',function(req,res){
-    connection.query('SELECT username from users where username like "%'+req.query.key+'%"',
-    function(err, rows, fields) {
-    if (err) throw err;
-    var data=[];
-    for(i=0;i<rows.length;i++)
-    {
-    data.push(rows[i].first_name);
-    }
-    res.end(JSON.stringify(data));
-    });
-});
-
  // all statics files in /public
 app.set("views", path.join(__dirname, "views"));
 app.use(bodyParser.json());
@@ -62,21 +46,9 @@ app.use('/profile',profileEditRoute);
 const showFeedRoute=require('./routes/showFeedRoute');
 app.use('/',showFeedRoute);
 
+const displayAccountRoute=require('./routes/displayAccountRoute');
+app.use('/',displayAccountRoute);
 
-app.post('/account/:username',(req,res)=>{
-  //alert(req.param.username);
-  console.log("Searched for =>  "+req.params['username']);
-  if(req.params['username']==req.session.username)
-  return res.redirect('/profile');
-  else
-  return res.render('showAccountView');
-  //return false;
-  //res.send(req.param['username']);
-})
-
-
-
- 
 app.listen(PORT,(err) =>{
     if(err) throw err;
     require('./model/createDb.js').createDatabase();

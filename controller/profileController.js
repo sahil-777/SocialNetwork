@@ -10,14 +10,14 @@ class profileController{
             let sql="SELECT * FROM userinfo WHERE id = "+req.session.num;
             connection.query(sql,(error,result)=>{
                 if(error) throw error;
-                console.log(result[0]);
+                //console.log(result[0]);
                 var imageName=result[0].profilepic;
-                console.log(imageName);
+                //console.log(imageName);
                 if(typeof imageName=='object'){ imageName = "default_profilepic.png"; }
 
                 let feedQuery="SELECT * FROM userfeed WHERE userid = "+req.session.num; 
                 connection.query(feedQuery,(error,feedResult)=>{
-                    console.log(feedResult);
+                    //console.log(feedResult);
                     
                     let likeQuery="SELECT DISTINCT feedname FROM likeinfo WHERE likedby="+req.session.num;
                     //console.log(likeQuery);

@@ -20,12 +20,12 @@ class showFeedController{
                 let sqlQuery1="SELECT * FROM commentinfo WHERE feedname='"+req.params['id']+"'";
                 connection.query(sqlQuery1,(error,comments)=>{
                     if(error) throw error;
-                    console.log('Comments Data =>')
+                    /*console.log('Comments Data =>')
                     for(let i=0;i<comments.length;i++){
                         console.log(comments[i]);
                         console.log('\n');    
-                        //comments[i].commentby=req.session.username;
-                    }
+                        comments[i].commentby=req.session.username;
+                    }*/
                     return res.render('showFeedView',{postId:req.params['id'],initialLikedDisliked:initialLikedDisliked,comments:comments});  
                 });
             });

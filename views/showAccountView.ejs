@@ -3,12 +3,58 @@
 <head>
         <meta charset="utf-8">
     <title>
-        Account
+        Profile
     </title>
-</head>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="http://cdnjs.cloudflare.com/ajax/libs/jquery.form/3.51/jquery.form.min.js"></script>
+    <script>
+        /*$(document).ready(function(){
+             
+        });  
+        */
+        function showFeed(id){
+            window.location='/showfeed/'+id;
+            return false;
+        }
 
+        
+          
+        
+         
+        
+         
+         
+  
+    </script>
+</head>
 <body>
-    Hii
+    <main id="one">
+    <p>ProfilePage!</p>
+
+    <img src="/profilepics/<%=dpName%>" height="250px" width="250px"><br>
+    <p>username: <%=data.username%></p>
+    <p>Fullname: <%=data.fullname%></p>
+    <p>Birthdate: <%=data.birthdate%></p>
+    <p>Bio: <%=data.bio%></p>
+
+    <form id="homeButton" action="/" method="GET">
+        <input type="submit" name="homePage" value="Home">
+    </form><br>
+
+     
+    <div id="showPost">
+    <% for(var i=0; i < feedResult.length; i++) { %>
+        <img id="<%=feedResult[i].feedname%>" onclick="showFeed(this.id);return false;"  src="/profilepics/<%=feedResult[i].feedname%>" height="250px" width="250px">
+        &nbsp;&nbsp;&nbsp;&nbsp;
+    <% } %>
+    </div>
+
+    </main>
+
+     
+
+
+    
 </body>
 
 </html>
