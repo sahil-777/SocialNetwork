@@ -56,6 +56,21 @@ class profileController{
         
         res.end("File is uploaded");
     };
+
+    searchProfile(req,res){
+        //console.log(req.query.key);
+        connection.query('SELECT username from users where username like "%'+req.query.key+'%"', function(err, rows, fields) {
+            if (err) throw err;
+        var data=[];
+        for(let i=0;i<rows.length;i++)
+            {
+            data.push(rows[i].username);
+            }
+            res.end(JSON.stringify(data));
+        });
+        
+    //	return false; 
+    }
 }
 module.exports = profileController;
 

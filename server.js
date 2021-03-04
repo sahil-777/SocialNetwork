@@ -63,20 +63,16 @@ const showFeedRoute=require('./routes/showFeedRoute');
 app.use('/',showFeedRoute);
 
 
-app.get('/profile/search',function(req,res){
-    //console.log(req.query.key);
-    connection.query('SELECT username from users where username like "%'+req.query.key+'%"', function(err, rows, fields) {
-          if (err) throw err;
-        var data=[];
-        for(i=0;i<rows.length;i++)
-          {
-            data.push(rows[i].username);
-          }
-          res.end(JSON.stringify(data));
-        });
-        
-    //	return false;
-});
+app.post('/account/:username',(req,res)=>{
+  //alert(req.param.username);
+  console.log("Searched for =>  "+req.params['username']);
+  if(req.params['username']==req.session.username)
+  return res.redirect('/profile');
+  else
+  return res.render('showAccountView');
+  //return false;
+  //res.send(req.param['username']);
+})
 
 
 

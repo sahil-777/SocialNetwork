@@ -10,7 +10,7 @@ $(document).ready(function(){
         remote: 'http://localhost:3000/profile/search?key=%QUERY',
         limit: 10
     });
-});
+}); 
 </script>
 </head>
 <body>
@@ -23,14 +23,20 @@ $(document).ready(function(){
         <input type="submit" value="Profile">
     </form>
     <br><br>
-
-    <form id="search-user-form" method="GET" action="/profile">
-        <input type="text" id="search-text" class="typeahead tt-query" name="typeahead" autocomplete="off" spellcheck="false" placeholder="Type your Query">
+    
+    <input type="text" id="search-text" class="typeahead tt-query" name="typeahead" autocomplete="off" spellcheck="false" placeholder="Type username">
+    <br><br><br>
+    <form id="search-user-form" method="POST" action="">
         <input type="submit" name="searchUser" id="search-user" value="search"> 
     </form>
     
-    
-    
+    <script>
+        $('#search-user-form').submit(function(){
+        let username = $('#search-text').val();
+        //alert(username);
+        $(this).attr('action', "/account/" + username);
+        }); 
+    </script>
 </body>
 </html>
 

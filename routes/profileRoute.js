@@ -19,3 +19,7 @@ router.post('/profile/postFeed',multer.single('userFeed'),(req,res)=>{
     profileController.uploadFeed(req,res);
 });
 module.exports = router;
+
+router.get('/profile/search',function(req,res){
+    profileController.searchProfile(req,res);
+});
