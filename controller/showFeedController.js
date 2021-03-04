@@ -16,12 +16,16 @@ class showFeedController{
                 if(result[result.length-3]=='1')
                     initialLikedDisliked="dislike";
                 
-                console.log(initialLikedDisliked);
+                //console.log(initialLikedDisliked);
                 let sqlQuery1="SELECT * FROM commentinfo WHERE feedname='"+req.params['id']+"'";
                 connection.query(sqlQuery1,(error,comments)=>{
                     if(error) throw error;
-                    for(let i=0;i<comments.length;i++)
-                    comments[i].commentby=req.session.username;
+                    console.log('Comments Data =>')
+                    for(let i=0;i<comments.length;i++){
+                        console.log(comments[i]);
+                        console.log('\n');    
+                        //comments[i].commentby=req.session.username;
+                    }
                     return res.render('showFeedView',{postId:req.params['id'],initialLikedDisliked:initialLikedDisliked,comments:comments});  
                 });
             });
@@ -93,7 +97,7 @@ class showFeedController{
         let commentData={
             "feedname":req.params['id'],
             "commenttext":req.body.commentText,
-            "commentby":req.session.num,
+            "commentby":req.session.username,
             "commentto":0
         }
         //console.log(JSON.stringify(commentData));
