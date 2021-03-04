@@ -34,6 +34,57 @@ const createTables = () =>{
     let tableName ="userinfo";
     console.log( tableName+ " Table created");
   });
+
+  sqlQuery ="USE socialnetwork; CREATE TABLE IF NOT EXISTS `userfeed` (" +
+    "id INT(11) NOT NULL AUTO_INCREMENT ,"+
+    "userid INT NOT NULL ,"+
+    "feedname VARCHAR(255) NULL ,"+
+    "created_at datetime NULL DEFAULT CURRENT_TIMESTAMP,"+
+    "likes INT NULL DEFAULT 0,"+
+	  "PRIMARY KEY (`id`),"+
+    "FOREIGN KEY(`userid`) REFERENCES users(id)"+
+  ")ENGINE = InnoDB AUTO_INCREMENT =2 DEFAULT CHARSET =utf8;";
+  
+  connection.query(sqlQuery,function (err,result) {
+    if (err) throw err;
+    let tableName ="userfeed";
+    console.log( tableName+ " Table created");
+  });
+
+  sqlQuery ="USE socialnetwork; CREATE TABLE IF NOT EXISTS `likeinfo` (" +
+    "id INT(11) NOT NULL AUTO_INCREMENT ,"+
+    "feedname VARCHAR(255) NULL ,"+
+    "likedby INT NULL ,"+
+	  "PRIMARY KEY (`id`)"+
+  ")ENGINE = InnoDB AUTO_INCREMENT =2 DEFAULT CHARSET =utf8;";
+  
+  connection.query(sqlQuery,function (err,result) {
+    if (err) throw err;
+    let tableName ="likeinfo";
+    console.log( tableName+ " Table created");
+  });
+
+  sqlQuery ="USE socialnetwork; CREATE TABLE IF NOT EXISTS `commentinfo` (" +
+    "id INT(11) NOT NULL AUTO_INCREMENT ,"+
+    "feedname VARCHAR(255) NULL ,"+
+    "commenttext VARCHAR(255) NULL ,"+
+    "commentby VARCHAR(255) NULL ,"+
+    "commentto VARCHAR(255) NULL ,"+
+    "likes INT NULL DEFAULT 0,"+
+    "created_at datetime NULL DEFAULT CURRENT_TIMESTAMP,"+
+    "PRIMARY KEY (`id`)"+
+  ")ENGINE = InnoDB AUTO_INCREMENT =2 DEFAULT CHARSET =utf8;";
+  
+  connection.query(sqlQuery,function (err,result) {
+    if (err) throw err;
+    let tableName ="commentinfo";
+    console.log( tableName+ " Table created");
+  });
+
+  
+
+
+
 };
 
 //createTables();
