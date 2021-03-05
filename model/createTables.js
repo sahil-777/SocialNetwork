@@ -81,6 +81,35 @@ const createTables = () =>{
     console.log( tableName+ " Table created");
   });
 
+  sqlQuery ="USE socialnetwork; CREATE TABLE IF NOT EXISTS `followinfo` (" +
+    "id INT(11) NOT NULL AUTO_INCREMENT ,"+
+    "follower VARCHAR(255) NULL ,"+
+    "following VARCHAR(255) NULL ,"+
+    "PRIMARY KEY (`id`)"+
+  ")ENGINE = InnoDB AUTO_INCREMENT =2 DEFAULT CHARSET =utf8;";
+  
+  connection.query(sqlQuery,function (err,result) {
+    if (err) throw err;
+    let tableName ="followinfo";
+    console.log( tableName+ " Table created");
+  });
+
+  sqlQuery ="USE socialnetwork; CREATE TABLE IF NOT EXISTS `followcount` (" +
+    "id INT(11) NOT NULL AUTO_INCREMENT ,"+
+    "username VARCHAR(255) NULL ,"+
+    "followers INT NULL DEFAULT 0,"+
+    "following INT NULL DEFAULT 0,"+
+    "PRIMARY KEY (`id`)"+
+  ")ENGINE = InnoDB AUTO_INCREMENT =2 DEFAULT CHARSET =utf8;";
+  
+  connection.query(sqlQuery,function (err,result) {
+    if (err) throw err;
+    let tableName ="followcount";
+    console.log( tableName+ " Table created");
+  });
+
+
+
   
 
 
