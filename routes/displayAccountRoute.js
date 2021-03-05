@@ -6,4 +6,9 @@ router.get('/account/:username',(req,res)=>{
     displayAccountController.displayAccount(req,res); 
 });
 
+router.post('/follow',(req,res)=>{
+    //console.log("Hii");
+    displayAccountController.followUser(req,res);
+});
+
 module.exports = router;

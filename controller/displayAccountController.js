@@ -74,6 +74,45 @@ class displayAccountController{
         //console.log("contMsg=> "+msg);
     } 
     */
+    followUser(req,res){
+        if(req.session.num!=null && typeof req.session.num!="undefined"){
+            console.log('Flag=> '+req.body.flag);
+            let flag=req.body.flag;
+            //console.log(req.session.username);
+            //console.log(req.body.following);
+            //let follower=req.session.username,following=req.body.following;
+            let followData={
+                follower:req.session.username,
+                following:req.body.following
+            }
+            let sqlQuery="INSERT INTO followinfo SET ?";
+            if(flag==0)
+            sqlQuery="DELETE FROM followinfo WHERE (follower= '"+followData.follower+ "' AND following= '"+followData.following+"')";
+
+            connection.query(sqlQuery,followData,(error,result)=>{
+                if(error) throw error;
+            });
+            
+
+            let val="+1";
+            if(flag==0)
+            val="-1";
+            sqlQuery="UPDATE followcount SET following = following "+val+" WHERE username='"+followData.follower+"'";
+            connection.query(sqlQuery,(error,result)=>{
+                if(error) throw error;
+            });
+    
+            sqlQuery="UPDATE followcount SET followers = followers "+val+" WHERE username='"+followData.following+"'";
+            connection.query(sqlQuery,(error,result)=>{
+                if(error) throw error;
+            });
+
+        }
+        else{
+            //console.log("Going to login");
+            return res.redirect('/login');
+        }
+    }
 }
 module.exports = displayAccountController;
 
