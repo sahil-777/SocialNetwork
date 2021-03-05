@@ -25,6 +25,36 @@ CREATE TABLE IF NOT EXISTS `userinfo` (
     `fullname` VARCHAR(50) NULL,
     `birthdate` DATE NULL,
     `bio` VARCHAR(255) NULL,
-	  PRIMARY KEY (`id`),
+	PRIMARY KEY (`id`),
     FOREIGN KEY(`id`) REFERENCES users(id)
+)ENGINE = InnoDB AUTO_INCREMENT =2 DEFAULT CHARSET =utf8;
+
+CREATE TABLE IF NOT EXISTS `userfeed`( 
+	`id` INT(11) NOT NULL AUTO_INCREMENT ,
+    `userid` INT NOT NULL,
+    `feedname` VARCHAR(255) NULL,
+    `created_at` datetime NULL DEFAULT CURRENT_TIMESTAMP,
+    `likes` INT NULL DEFAULT 0,
+    PRIMARY KEY (`id`),
+    FOREIGN KEY (`userid`) REFERENCES users(`id`)
+)ENGINE = InnoDB AUTO_INCREMENT =2 DEFAULT CHARSET =utf8;
+
+  
+CREATE TABLE IF NOT EXISTS `likeinfo` (
+	`id` INT(11) NOT NULL AUTO_INCREMENT,
+    `feedname` VARCHAR(255) NULL,
+    `likedby` INT NULL,
+    PRIMARY KEY (`id`)
+)ENGINE = InnoDB AUTO_INCREMENT =2 DEFAULT CHARSET =utf8;
+
+
+CREATE TABLE IF NOT EXISTS `commentinfo` (
+	`id` INT(11) NOT NULL AUTO_INCREMENT,
+    `feedname` VARCHAR(255) NULL,
+    `commenttext` VARCHAR(255) NULL,
+    `commentby` VARCHAR(255) NULL,
+    `commentto` VARCHAR(255) NULL,
+    `likes` INT NULL DEFAULT 0,
+	`created_at` datetime NULL DEFAULT CURRENT_TIMESTAMP,
+    PRIMARY KEY (`id`)
 )ENGINE = InnoDB AUTO_INCREMENT =2 DEFAULT CHARSET =utf8;
