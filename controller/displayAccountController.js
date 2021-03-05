@@ -42,7 +42,19 @@ class displayAccountController{
                         if(error) throw error;
                         //console.log(likeResult);
                         //res.send("Hii");
-                        return res.render('showAccountView',{data:result[0],dpName:imageName,feedResult:feedResult,likeResult:likeResult});
+                        let followQuery="SELECT EXISTS(SELECT 1 FROM followinfo WHERE (follower = '"+req.session.username+"' AND following = '"+result[0].username+"') LIMIT 1)";
+                        //console.log(followQuery);
+                        connection.query(followQuery,(error,followResult)=>{
+                            if(error) throw error;
+                            followResult=JSON.stringify(followResult);
+                            //console.log(result);
+                
+                            let initialFollowedUnfollowed="Follow";
+                            if(followResult[followResult.length-3]=='1')
+                            initialFollowedUnfollowed="Unfollow";
+                            
+                            return res.render('showAccountView',{data:result[0],dpName:imageName,feedResult:feedResult,likeResult:likeResult,initialFollowedUnfollowed:initialFollowedUnfollowed});
+                        })
                     });
                 })
             });

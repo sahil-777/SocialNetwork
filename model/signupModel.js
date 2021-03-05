@@ -32,6 +32,7 @@ class signupModel {
             //console.log(userData);
             //res.send(userData.profilepic);
             connection.query('INSERT INTO userinfo SET ?',userData);
+            connection.query('INSERT INTO followcount SET ?',{"username":userData.username});
             }
         });
         //console.log(result);
