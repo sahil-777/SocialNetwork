@@ -48,6 +48,7 @@ class profileController{
 
         let feedData={
             "userid":req.session.num,
+            "username":req.session.username,
             "feedname":req.file.filename,   
         }//Everything else is bydefault i.e. created_at,likes,id
         //console.log(feedData);

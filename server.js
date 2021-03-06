@@ -50,7 +50,9 @@ const displayAccountRoute=require('./routes/displayAccountRoute');
 app.use('/',displayAccountRoute);
 
 
+/*app.post('/loadFeed',(req,res)=>{
 
+});*/
 
 app.listen(PORT,(err) =>{
     if(err) throw err;

@@ -32,6 +32,7 @@ CREATE TABLE IF NOT EXISTS `userinfo` (
 CREATE TABLE IF NOT EXISTS `userfeed`( 
 	`id` INT(11) NOT NULL AUTO_INCREMENT ,
     `userid` INT NOT NULL,
+    `username` VARCHAR(255) NOT NULL,
     `feedname` VARCHAR(255) NULL,
     `created_at` datetime NULL DEFAULT CURRENT_TIMESTAMP,
     `likes` INT NULL DEFAULT 0,
