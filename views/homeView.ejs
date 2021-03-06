@@ -4,13 +4,17 @@
 <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
 <script  type="text/javascript" src="../JS/typeahead.min.js"></script>
 <script type="text/javascript">
-$(document).ready(function(){
-    $('input.typeahead').typeahead({
-        name: 'countries',
-        remote: 'http://localhost:3000/profile/search?key=%QUERY',
-        limit: 10
-    });
-}); 
+        $(document).ready(function(){
+            $('input.typeahead').typeahead({
+                name: 'countries',
+                remote: 'http://localhost:3000/profile/search?key=%QUERY',
+                limit: 10
+            });
+        });
+        function showFeed(id){
+            window.location='/showfeed/'+id;
+            return false;
+        } 
 </script>
 </head>
 <body>
@@ -29,6 +33,15 @@ $(document).ready(function(){
     <form id="search-user-form" method="GET" action="">
         <input type="submit" name="searchUser" id="search-user" value="search"> 
     </form>
+
+    <div id="load-feed">
+        <% for(var i=0; i < feedResult.length; i++) { %>
+            <img id="<%=feedResult[i].feedname%>" onclick="showFeed(this.id);return false;"  src="profilepics/<%=feedResult[i].feedname%>" height="500px" width="500px"><br>
+            &nbsp;&nbsp;&nbsp;&nbsp;
+        <% } %>
+    </div>
+
+
     
     <script>
         $('#search-user-form').submit(function(){
