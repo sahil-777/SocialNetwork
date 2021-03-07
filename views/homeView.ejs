@@ -11,12 +11,15 @@
                 limit: 10
             });
 
+            
             /*$(window).scroll(function() {
                 if($(window).scrollTop() == $(document).height() - $(window).height()) {
                 // ajax call get data from server and append to the div
                     ('#add-data').append('<li>Main<li>')
                 }
             });*/
+
+
             
          
 
@@ -31,6 +34,23 @@
             window.location='/account/'+username;
             return false;
     }
+    function setLikeBtnValue(feedname,data){//Right
+        $.post('/isliked', {feedname:feedname}, function(result) {
+                //window.location='/';//If not logged-in
+                if(result==true){
+                    //alert("Yes");
+                    //$(data.id).prop('value','Save');
+                    //alert(data.id);
+                    $(data).prop('value','dislike');//Right
+                    //alert("Hii");
+                    //alert(data.id);
+                }
+                return false;
+        });
+    }
+
+     
+
 </script>
 </head>
 <body>
@@ -46,7 +66,7 @@
     
     <input type="text" id="search-text" class="typeahead tt-query" name="typeahead" autocomplete="off" spellcheck="false" placeholder="Type username">
     <br><br><br>
-    <form id="search-user-form" method="GET" action="">
+    <form id="search-user-form" method="GET" action="" >
         <input type="submit" name="searchUser" id="search-user" value="search"> 
     </form>
 
@@ -54,6 +74,7 @@
         <% for(var i=0; i < feedResult.length; i++) { %>
             <label onclick="showAccount('<%=feedResult[i].username%>')"><%=feedResult[i].username%></label><br>
             <img id="<%=feedResult[i].feedname%>" onclick="showFeed(this.id);return false;"  src="profilepics/<%=feedResult[i].feedname%>" height="500px" width="500px"><br>
+            <input type="button" id="like-btn-<%=feedResult[i].feedname%>"   onclick="setLikeBtnValue('<%=feedResult[i].feedname%>',this)" value="Like" >
             <button onclick="showFeed('<%=feedResult[i].feedname%>')">Comment</button>
             <br><br>
             &nbsp;&nbsp;&nbsp;&nbsp;

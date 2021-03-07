@@ -11,7 +11,7 @@ dotenv.config();
 app.use(express.static(__dirname + "/uploads" ) );
 const upload=require('./middleware/multerSetup').single("uploadFile");
 
-    
+
  // all statics files in /public
 app.set("views", path.join(__dirname, "views"));
 app.use(bodyParser.json());
@@ -49,10 +49,19 @@ app.use('/',showFeedRoute);
 const displayAccountRoute=require('./routes/displayAccountRoute');
 app.use('/',displayAccountRoute);
 
+const api=require('./api/likeApi');
+const x=new api();
 
-/*app.post('/loadFeed',(req,res)=>{
+//console.log("1615136652702.jpg",2);
+//console.log(x.isLiked("1615136652702.jpg",2));
+//console.log(x.isLiked("1615136652702.jpg",2));
 
-});*/
+app.post('/isliked',(req,res)=>{
+    console.log("----------------------------------")
+    console.log(req.body);
+    //res.send("Hii")
+    x.isLiked(req,res);
+})
 
 app.listen(PORT,(err) =>{
     if(err) throw err;
