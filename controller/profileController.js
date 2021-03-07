@@ -24,7 +24,12 @@ class profileController{
                     connection.query(likeQuery,(error,likeResult)=>{
                         if(error) throw error;
                         //console.log(likeResult);
-                        return res.render('profileView',{data:result[0],dpName:imageName,feedResult:feedResult,likeResult:likeResult});
+                        let followQuery="SELECT followers,following FROM followcount WHERE username='"+req.session.username+"'";
+                        connection.query(followQuery,(error,followResult)=>{
+                            if(error) throw error;
+                            console.log(followResult);
+                            return res.render('profileView',{data:result[0],dpName:imageName,feedResult:feedResult,likeResult:likeResult,followResult:followResult[0]});
+                        });
                     });
                 })
             });

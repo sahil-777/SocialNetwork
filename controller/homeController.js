@@ -19,7 +19,7 @@ class homeController{
                  return res.render('homeView',{feedResult:feedResult});
              });
         }
-        else{ 
+        else{  
             console.log("Not loggedIn "+req.session.num);
             return res.redirect('/login');
         }
