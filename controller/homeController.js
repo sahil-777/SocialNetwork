@@ -8,7 +8,7 @@ class homeController{
         if(req.session.num!=null && typeof req.session.num!="undefined"){//If user has logged in
             console.log("LoggedIn "+req.session.num);
             let feedQuery="SELECT followinfo.following AS username,userfeed.feedname AS feedname FROM userfeed INNER JOIN followinfo "+ 
-             " ON userfeed.username = followinfo.following WHERE followinfo.follower= '"+req.session.username+"'"; 
+             " ON userfeed.username = followinfo.following WHERE followinfo.follower= '"+req.session.username+"' ORDER BY created_at DESC"; 
             //WHERE userid!="+req.session.num;
             //console.log(feedQuery);
              connection.query(feedQuery,(error,feedResult)=>{
