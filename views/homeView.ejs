@@ -10,11 +10,22 @@
                 remote: 'http://localhost:3000/profile/search?key=%QUERY',
                 limit: 10
             });
-        });
-        function showFeed(id){
+
+            /*$(window).scroll(function() {
+                if($(window).scrollTop() == $(document).height() - $(window).height()) {
+                // ajax call get data from server and append to the div
+                    ('#add-data').append('<li>Main<li>')
+                }
+            });*/
+            
+         
+
+        
+    });
+    function showFeed(id){
             window.location='/showfeed/'+id;
             return false;
-        } 
+    }
 </script>
 </head>
 <body>
@@ -37,10 +48,12 @@
     <div id="load-feed">
         <% for(var i=0; i < feedResult.length; i++) { %>
             <img id="<%=feedResult[i].feedname%>" onclick="showFeed(this.id);return false;"  src="profilepics/<%=feedResult[i].feedname%>" height="500px" width="500px"><br>
+            <button onclick="showFeed('<%=feedResult[i].feedname%>')">Comment</button>
+            <br><br>
             &nbsp;&nbsp;&nbsp;&nbsp;
         <% } %>
     </div>
- 
+
 
     
     <script>
