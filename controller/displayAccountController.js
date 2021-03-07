@@ -53,7 +53,12 @@ class displayAccountController{
                             if(followResult[followResult.length-3]=='1')
                             initialFollowedUnfollowed="Unfollow";
                             
-                            return res.render('showAccountView',{data:result[0],dpName:imageName,feedResult:feedResult,likeResult:likeResult,initialFollowedUnfollowed:initialFollowedUnfollowed});
+                            let followQuery="SELECT followers,following FROM followcount WHERE username='"+result[0].username+"'";
+                            connection.query(followQuery,(error,followResult)=>{
+                            if(error) throw error;
+                            //console.log(followResult);
+                            return res.render('showAccountView',{data:result[0],dpName:imageName,feedResult:feedResult,likeResult:likeResult,initialFollowedUnfollowed:initialFollowedUnfollowed,followResult:followResult[0]});
+                            });
                         })
                     });
                 })
