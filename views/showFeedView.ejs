@@ -64,6 +64,11 @@
             });
         });
 
+        function showAccount(username){
+            window.location='/account/'+username;
+            return false;
+        }
+
       
 </script>
 
@@ -73,9 +78,9 @@
     <form action="/profile" method="GET">
         <input type="submit" value="close">
     </form><br><br>
-
+    <p>Likes: <%=likeCount.likes%></p>
     <input type="button" id="likeImage" value="<%=initialLikedDisliked%>" name="likeImage"/>
-    <button id="commentImage">Comment</button>
+    <button id="commentImage"><%=comments.length%>  Comments</button>
     <div id="commentSection" hidden>
         <form id="postCommentForm" action="/profile/postFeed/<%=postId%>/comment" method="POST" >
             <input type="text" autocomplete="off" name="commentText" placeholder="Comment here...">
@@ -85,9 +90,8 @@
 
     <div id="loadComments" hidden>
         <% for (let i=0;i< comments.length ;i++) { %>
-
-            <p><%= comments[i].commentby %><br>
-                <%= comments[i].commenttext %></p>
+            <label onclick="showAccount('<%= comments[i].commentby %>')"><%= comments[i].commentby %></label>
+            <p><%= comments[i].commenttext %></p>
         <% } %>
     </div>
     <button id="loadNextComments" hidden>Load next three Comments</button>

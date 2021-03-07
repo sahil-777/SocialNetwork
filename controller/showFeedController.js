@@ -26,7 +26,12 @@ class showFeedController{
                         console.log('\n');    
                         comments[i].commentby=req.session.username;
                     }*/
-                    return res.render('showFeedView',{postId:req.params['id'],initialLikedDisliked:initialLikedDisliked,comments:comments});  
+                    let likeCountQuery="SELECT likes FROM userfeed WHERE feedname='"+req.params['id']+"'";
+                    connection.query(likeCountQuery,(error,likeCount)=>{
+                        if(error) throw error;
+                        console.log(likeCount[0]);
+                        return res.render('showFeedView',{ likeCount:likeCount[0],postId:req.params['id'],initialLikedDisliked:initialLikedDisliked,comments:comments});  
+                    })
                 });
             });
         }

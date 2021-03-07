@@ -26,6 +26,11 @@
             window.location='/showfeed/'+id;
             return false;
     }
+
+    function showAccount(username){
+            window.location='/account/'+username;
+            return false;
+    }
 </script>
 </head>
 <body>
@@ -47,6 +52,7 @@
 
     <div id="load-feed">
         <% for(var i=0; i < feedResult.length; i++) { %>
+            <label onclick="showAccount('<%=feedResult[i].username%>')"><%=feedResult[i].username%></label><br>
             <img id="<%=feedResult[i].feedname%>" onclick="showFeed(this.id);return false;"  src="profilepics/<%=feedResult[i].feedname%>" height="500px" width="500px"><br>
             <button onclick="showFeed('<%=feedResult[i].feedname%>')">Comment</button>
             <br><br>
