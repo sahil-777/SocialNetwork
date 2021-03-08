@@ -13,6 +13,8 @@ class homeController{
             //console.log(feedQuery);
              connection.query(feedQuery,(error,feedResult)=>{
                 if(error) throw error;
+                if(feedResult.length==0)
+                return res.render('homeView',{feedResult:feedResult});
                 for(let i=0;i<feedResult.length;i++){
                     let fdname=feedResult[i].feedname;
                     let userId=req.session.num;
