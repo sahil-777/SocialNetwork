@@ -1,4 +1,5 @@
-connection = require('../config');
+const connection = require('../config');
+
 
 class editProfileModel {
     
@@ -23,7 +24,12 @@ class editProfileModel {
                 if(error) throw error;
                 connection.query(sqlQuery1,userInfo,(error,result)=>{
                     if(error) throw error;
-                    res.render('editProfileView',{msg:"Saved successfully!"});
+                    let userInfoQuery="SELECT * FROM userinfo WHERE id='"+req.session.num+"'";
+                    connection.query(userInfoQuery,(error,userInfoResult)=>{
+                        if(error) throw error;
+                        console.log(userInfoResult[0]);
+                        return res.render('editProfileView',{msg:"Saved successfully!",userInfo:userInfoResult[0]});
+                    });
                 });
             });
         });

@@ -7,7 +7,12 @@ class editProfileController{
         //console.log(req.session.num);
         if(req.session.num!=null && typeof req.session.num!="undefined"){//If user has logged in
             console.log("LoggedIn "+req.session.num);
-            return res.render('editProfileView',{msg:null});
+            let userInfoQuery="SELECT * FROM userinfo WHERE id='"+req.session.num+"'";
+                    connection.query(userInfoQuery,(error,userInfoResult)=>{
+                        if(error) throw error;
+                        console.log(userInfoResult[0]);
+                        return res.render('editProfileView',{msg:"null",userInfo:userInfoResult[0]});
+                    });
         }
         else{ 
             console.log("Not loggedIn "+req.session.num);
