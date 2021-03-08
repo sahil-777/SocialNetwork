@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <!--  This file has been downloaded from bootdey.com    @bootdey on twitter -->
+    <!--  All snippets are MIT license http://bootdey.com/license -->
+    <title>Edit Profile</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link href="http://netdna.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" rel="stylesheet">
+    <style type="text/css">
+    	body{
+    margin-top:20px;
+    background:#f8f8f8
+    }
+    input[type="file"] {
+    display: none;
+    }
+    .custom-profile-pic-upload {
+    border: 1px solid #ccc;
+    display: inline-block;
+    padding: 6px 12px;
+    cursor: pointer;
+    background-color: #007BFF;
+    color: white;
+    border-radius: 4px;
+    }
+    .simple-btn {
+    border: 1px solid rgb(0, 0, 0);
+    display: inline-block;
+    padding: 6px 12px;
+    cursor: pointer;
+    background-color: white;
+    border-radius: 4px;
+    }
+    </style>
+</head>
+<body>
+<link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css" rel="stylesheet">
+<div class="container">
+<div class="row flex-lg-nowrap">
+  <div class="col-12 col-lg-auto mb-3" style="width: 200px;">
+    <div class="card p-3">
+      <div class="e-navlist e-navlist--active-bg">
+        <ul class="nav">
+          <li class="nav-item"><a class="nav-link px-2 active" href="/profile"><i class="fa fa-fw fa-bar-chart mr-1"></i><span> Profile</span></a></li>
+          <li class="nav-item"><a class="nav-link px-2" href="/"><i class="fa fa-fw fa-home mr-1" aria-hidden="true"></i><span> Home</span></a></li>
+        <!--<li class="nav-item"><a class="nav-link px-2" href="./settings.html"><i class="fa fa-fw fa-cog mr-1"></i><span>Settings</span></a></li>-->
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <div class="col">
+    <div class="row">
+      <div class="col mb-3">
+        <div class="card">
+          <div class="card-body">
+            <div class="e-profile">
+
+              <form class="form" novalidate="" action="/profile/edit" method="POST" enctype="multipart/form-data">
+
+              <div class="row">
+                <!--Profile Pic-->
+                <div class="col-12 col-sm-auto mb-3">
+                  <div class="mx-auto" style="width: 140px;">
+                    <div class="d-flex justify-content-center align-items-center rounded" style="height: 140px; background-color: rgb(233, 236, 239);">
+                    <span><img style="width: 135px;" src="/profilepics/<%=userInfo.profilepic%>"></span>
+                    </div>
+                  </div>
+                </div>
+                <!-------------->
+                <div class="col d-flex flex-column flex-sm-row justify-content-between mb-3">
+                  <div class="text-center text-sm-left mb-2 mb-sm-0">
+                    <h4 class="pt-sm-2 pb-1 mb-0 text-nowrap"><%=userInfo.fullname%></h4>
+                    <p class="mb-0">@<%=userInfo.username%></p>
+                    <div class="text-muted"><small><i class="fa fa-circle" aria-hidden="true" style="color:limegreen;"></i> online</small></div>
+                    <div class="mt-2">
+                        <label for="file-upload" class="custom-profile-pic-upload">
+                            <i class="fa fa-fw fa-camera"></i> Change Photo
+                        </label>
+                        <input id="file-upload" type="file" name="profilePic">
+                    </div>
+                  </div>
+                  <!--Follower, Foloowing List-->
+                    <div class="text-center text-sm-right">
+                    <button class="simple-btn"><a href="/followers" style="color:black;text-decoration: none;">My Followers</a></button>
+                    <!--<div class="text-muted"><small>Joined 09 Dec 2017</small></div>-->
+                    <button class="simple-btn"><a href="/following" style="color:black;text-decoration: none;">My Following</a></button>
+                    </div>
+                  <!----------------------->
+                </div>
+              </div>
+              <ul class="nav nav-tabs">
+                <li class="nav-item"><a href="" class="active nav-link">Settings</a></li>
+              </ul>
+              <div class="tab-content pt-3">
+                <div class="tab-pane active">
+
+                  <div class="row">
+                      <div class="col">
+                        <div class="row">
+                          <div class="col">
+                            <div class="form-group">
+                              <label>Full Name</label>
+                              <input class="form-control" type="text" name="fullName" placeholder="Name">
+                            </div>
+                          </div>
+                          <div class="col">
+                            <div class="form-group">
+                              <label>Username</label>
+                              <input class="form-control" type="text" name="userName" placeholder="Username">
+                            </div>
+                          </div>
+                        </div>
+                        <div class="row">
+                          <div class="col">
+                            <div class="form-group">
+                              <label>BirthDate</label>
+                              <input class="form-control" type="date" name="DOB" placeholder="DOB">
+                            </div>
+                          </div>
+                        </div>
+                        <div class="row">
+                          <div class="col mb-3">
+                            <div class="form-group">
+                              <label>Bio</label>
+                              <textarea class="form-control" name="Bio" rows="5" placeholder="My Bio"></textarea>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                     
+                    <div class="row">
+                      <!--Msg------------------------
+                      <div class="col d-flex flex-column flex-sm-row justify-content-between mb-3">
+                        <div class="text-center text-sm-left mb-2 mb-sm-0">
+                          <h4 class="pt-sm-2 pb-1 mb-0 text-nowrap"><%=userInfo.fullname%></h4>
+                          <p class="mb-0">@<%=userInfo.username%></p>
+                          <div class="text-muted"><small><i class="fa fa-circle" aria-hidden="true" style="color:limegreen;"></i> online</small></div>
+                          <div class="mt-2">
+                              <label for="file-upload" class="custom-profile-pic-upload">
+                                  <i class="fa fa-fw fa-camera"></i> Change Photo
+                              </label>
+                              <input id="file-upload" type="file" name="profilePic">
+                          </div>
+                        </div>
+                      -->
+                      <div class="col d-flex justify-content-end">
+                        <span><pre><%=msg%>                      </pre></span>
+                        <input class="custom-profile-pic-upload" type="submit" value="Save Changes">
+                      </div>
+                    </div>
+                  </form>
+
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="col-12 col-md-3 mb-3">
+        <div class="card mb-3">
+          <div class="card-body">
+            <div class="px-xl-3">
+              <button class="btn btn-block btn-secondary">
+                <i class="fa fa-sign-out"></i>
+                <span><a href="/login" style="color: #f8f8f8;text-decoration: none;">Logout</a></span>
+              </button>
+            </div>
+          </div>
+        </div>
+        <!--<div class="card">
+          <div class="card-body">
+            <h6 class="card-title font-weight-bold">Support</h6>
+            <p class="card-text">Get fast, free help from our friendly assistants.</p>
+            <button type="button" class="btn btn-primary">Contact Us</button>
+          </div>
+        </div>-->
+      </div>
+    </div>
+
+  </div>
+</div>
+</div>
+<script src="http://code.jquery.com/jquery-1.10.2.min.js"></script>
+<script src="http://netdna.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js"></script>
+<script type="text/javascript">
+	
+</script>
+</body>
+</html>
