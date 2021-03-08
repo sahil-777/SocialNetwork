@@ -13,10 +13,32 @@ class homeController{
             //console.log(feedQuery);
              connection.query(feedQuery,(error,feedResult)=>{
                 if(error) throw error;
-                for(let i=0;i<feedResult.length;i++)
-                 console.log(feedResult[i]);
-            
-                 return res.render('homeView',{feedResult:feedResult});
+                for(let i=0;i<feedResult.length;i++){
+                    let fdname=feedResult[i].feedname;
+                    let userId=req.session.num;
+                    //console.log(req.body)
+                    //feedname+="1";
+                    let isLikedQuery="SELECT EXISTS(SELECT 1 FROM likeinfo WHERE (feedname = '"+fdname+"' AND likedby = '"+userId+"') LIMIT 1)"
+                    connection.query(isLikedQuery,(error,isLikedResult)=>{
+                        if(error) throw error;
+                        let R=JSON.stringify(isLikedResult[0]);
+                        //console.log(R);
+                        if(R[R.length-2]=='1'){
+                            feedResult[i].isliked="dislike";
+                        }
+                        else
+                        feedResult[i].isliked="like";
+                        console.log(feedResult[i]);
+                        
+                        if(i==feedResult.length-1){
+                            return res.render('homeView',{feedResult:feedResult});
+                        }
+                    });
+                }
+                // for(let i=0;i<feedResult.length;i++){
+                //     console.log(feedResult[i]);
+                // }
+
              });
         }
         else{  

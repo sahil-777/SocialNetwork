@@ -11,6 +11,35 @@
                 limit: 10
             });
 
+            $('#likeImage').click(function(){
+                //alert('Hii');
+                let flag=1;  
+                if($('#likeImage').val()=='dislike')
+                flag=0;
+
+
+                if($('#likeImage').val()=='like'){
+                    //$('#likeImage').html('dislike');
+                    $('#likeImage').attr('value',"dislike");
+                }
+                else{
+                    //$('#likeImage').html('like');
+                    $('#likeImage').attr('value',"like");
+                }
+                $.ajax({
+                    url: "/profile/postFeed/"+1+"/likeImage/"+flag, 
+                    type:"POST",
+                    timeout:500,
+                    //dataType:'json',
+                    success: function(){
+                        //
+                        alert('Liked!');
+                    },
+                    error:function(error){
+                        throw error;
+                    }
+                });
+            });
             
             /*$(window).scroll(function() {
                 if($(window).scrollTop() == $(document).height() - $(window).height()) {
@@ -18,12 +47,6 @@
                     ('#add-data').append('<li>Main<li>')
                 }
             });*/
-
-
-            
-         
-
-        
     });
     function showFeed(id){
             window.location='/showfeed/'+id;
@@ -34,19 +57,36 @@
             window.location='/account/'+username;
             return false;
     }
-    function setLikeBtnValue(feedname,data){//Right
-        $.post('/isliked', {feedname:feedname}, function(result) {
-                //window.location='/';//If not logged-in
-                if(result==true){
-                    //alert("Yes");
-                    //$(data.id).prop('value','Save');
-                    //alert(data.id);
-                    $(data).prop('value','dislike');//Right
-                    //alert("Hii");
-                    //alert(data.id);
+
+    function likeImage(feedname,data){
+                //alert(feedname);
+                let flag=1;  
+                if($(data).val()=='dislike')
+                flag=0;
+
+
+                if($(data).val()=='like'){
+                    //$(data).html('dislike');
+                    $(data).attr('value',"dislike");
                 }
-                return false;
-        });
+                else{
+                    //$(data).html('like');
+                    $(data).attr('value',"like");
+                }
+                $.ajax({
+                    url: "/profile/postFeed/"+feedname+"/likeImage/"+flag, 
+                    type:"POST",
+                    timeout:500,
+                    //dataType:'json',
+                    success: function(){
+                        //
+                        alert(url);
+                        //alert('Liked!');
+                    },
+                    error:function(error){
+                        throw error;
+                    }
+                });
     }
 
      
@@ -74,15 +114,12 @@
         <% for(var i=0; i < feedResult.length; i++) { %>
             <label onclick="showAccount('<%=feedResult[i].username%>')"><%=feedResult[i].username%></label><br>
             <img id="<%=feedResult[i].feedname%>" onclick="showFeed(this.id);return false;"  src="profilepics/<%=feedResult[i].feedname%>" height="500px" width="500px"><br>
-            <input type="button" id="like-btn-<%=feedResult[i].feedname%>"   onclick="setLikeBtnValue('<%=feedResult[i].feedname%>',this)" value="Like" >
+            <input type="button" id="like-btn-<%=feedResult[i].feedname%>" onclick="likeImage('<%=feedResult[i].feedname%>',this)" value="<%=feedResult[i].isliked%>" >
             <button onclick="showFeed('<%=feedResult[i].feedname%>')">Comment</button>
             <br><br>
             &nbsp;&nbsp;&nbsp;&nbsp;
         <% } %>
     </div>
-
-
-    
     <script>
         $('#search-user-form').submit(function(){
         let username = $('#search-text').val();
