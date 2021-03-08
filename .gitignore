@@ -4,7 +4,6 @@ TempLocalFiles
 .vscode
 temp.js
 views/tempView.ejs
-uploads
 uploads/profilepics
 tempServer.js
 .env
