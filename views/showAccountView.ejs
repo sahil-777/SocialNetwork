@@ -54,26 +54,17 @@
         
     </script>
     <style type="text/css">
-    input[type="file"] {
-    display: none;
-    }
-    .custom-profile-pic-upload {
-    border: 1px solid #ccc;
-    display: inline-block;
-    padding: 6px 12px;
-    cursor: pointer;
+    .follow-btn {
+    font-size: 1.8rem;
+    line-height: 1.8;
+    border: 0.2rem solid white;
+    border-radius: 0.2rem;
+    padding: 0 2.4rem;
+    margin-left: 2rem;
     background-color: #007BFF;
     color: white;
-    border-radius: 4px;
     }
-    .simple-btn {
-    border: 1px solid grey;
-    display: inline-block;
-    padding: 3px 12px;
-    cursor: pointer;
-    background-color: white;
-    border-radius: 4px;
-    }
+     
     </style>
 </head>
 <body>
@@ -95,10 +86,7 @@
 
 				<h1 class="profile-user-name"><%=data.username%></h1>
 
-                 
-                
-                <input type="button" id="follow-btn" class="btn profile-edit-btn" value="<%=initialFollowedUnfollowed%>" name="followUser"></button>
-
+                <input type="button" id="follow-btn" class="btn follow-btn" value="<%=initialFollowedUnfollowed%>" name="followUser">
 				<button class="btn profile-settings-btn" aria-label="profile settings"><i class="fas fa-cog" aria-hidden="true"></i></button>
                 
                 <!--
