@@ -1,28 +1,29 @@
-<!doctype html>
-<html lang="en">
+<!DOCTYPE html>
+<html>
 <head>
-        <meta charset="utf-8">
+	<meta charset="utf-8">
         <meta charset="utf-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <meta name="viewport" content="width=device-width, initial-scale=1">
     
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+        <link rel="stylesheet" href="assets/css/insta-profile-clone.css">
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
         <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
 
     <title>
-        Profile
+        Profile Page
     </title>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <script src="http://cdnjs.cloudflare.com/ajax/libs/jquery.form/3.51/jquery.form.min.js"></script>
     <script>
         $(document).ready(function(){
-            $("#uploadFeedButton").click(function(){
-                $("#uploadFeedForm").toggle();
+            $("#upload-Feed-Button").click(function(){
+                $("#upload-Feed-Form").toggle();
             });
             
-            $('#uploadFeedForm').submit(function() {
-            $("#status").empty().text("File is uploading...");
+            $('#upload-Feed-Form').submit(function() {
+            $("#status").empty().text("Uploading...");
             $(this).ajaxSubmit({
                 error: function(xhr) {
                 status('Error: ' + xhr.status);
@@ -41,58 +42,326 @@
             window.location='/showfeed/'+id;
             return false;
         }
-
         
-          
-        
-         
-        
-         
-         
-  
     </script>
+    <style type="text/css">
+    input[type="file"] {
+    display: none;
+    }
+    .custom-profile-pic-upload {
+    border: 1px solid #ccc;
+    display: inline-block;
+    padding: 6px 12px;
+    cursor: pointer;
+    background-color: #007BFF;
+    color: white;
+    border-radius: 4px;
+    }
+    .simple-btn {
+    border: 1px solid grey;
+    display: inline-block;
+    padding: 3px 12px;
+    cursor: pointer;
+    background-color: white;
+    border-radius: 4px;
+    }
+    </style>
 </head>
 <body>
-    <main id="one">
-    <p>ProfilePage!</p>
-    <!--<p>1612436165880.png</p>
-    <p><%=dpName%></p>
-    <img src="profilepics/1612436165880.png" height="100px" width="100">-->
-
-    <img src="profilepics/<%=dpName%>" height="250px" width="250px"><br>
-    <p>Followers: <%=followResult.followers%> </p>
-    <p>Following: <%=followResult.following%></p>
-    <p>username: <%=data.username%></p>
-    <p>Fullname: <%=data.fullname%></p>
-    <p>Bio: <%=data.bio%></p>
-    <form id="profileForm" action="/profile/edit" method="GET">
-        <input type="submit" name="editProfile" value="Edit Profile">
-    </form><br>
-
-    <form id="homeButton" action="/" method="GET">
-        <input type="submit" name="homePage" value="Home">
-    </form><br>
-
-    <button id="uploadFeedButton">Upload Feed</button><br><br>
-    <form id="uploadFeedForm" hidden action="/profile/postFeed" method="POST" enctype="multipart/form-data">
-        <input id="uploadFile" type="file" name="userFeed" value="Upload File" />
-        <input type="submit" id="uploadFeed" name="Upload" />
-        <span id = "status"></span>
-    </form>
-    
-    <div id="showPost">
-    <% for(var i=0; i < feedResult.length; i++) { %>
-        <img id="<%=feedResult[i].feedname%>" onclick="showFeed(this.id);return false;"  src="profilepics/<%=feedResult[i].feedname%>" height="250px" width="250px">
-        &nbsp;&nbsp;&nbsp;&nbsp;
-    <% } %>
-    </div>
-
-    </main>
-
-     
 
 
-    
+<header>
+
+	<div class="container">
+
+		<div class="profile">
+
+			<div class="profile-image">
+
+				<img src="profilepics/<%=dpName%>" height="152px" width="152px" alt="">
+
+			</div>
+
+			<div class="profile-user-settings">
+
+				<h1 class="profile-user-name"><%=data.username%></h1>
+
+				<button class="btn profile-edit-btn"><a href="/profile/edit" style="color: black;text-decoration: none;">Edit Profile</a></button>
+
+				<!--<button class="btn profile-settings-btn" aria-label="profile settings"><i class="fas fa-cog" aria-hidden="true"></i></button>
+                -->
+                <!--<button class="btn profile-settings-btn" aria-label="profile settings"><i class="fas fa-cog" aria-hidden="true"></i>Hii</button>
+                -->
+                <button id="upload-Feed-Button" class="btn profile-edit-btn"><i class="fa fa-fw fa-camera"></i>Upload Feed</button><br><br>
+                <form id="upload-Feed-Form" hidden action="/profile/postFeed" method="POST" enctype="multipart/form-data">
+                    <label for="upload-File" class="custom-profile-pic-upload">
+                        <i class="fa fa-fw fa-camera"></i> Upload
+                    </label>
+                    <input id="upload-File" type="file" name="userFeed" value="Upload File" />
+                    <input class="simple-btn" type="submit" id="upload-Feed" name="Upload" />
+                    <span id = "status"></span>
+                </form>
+			</div>
+
+			<div class="profile-stats">
+
+				<ul>
+					<!--<li><span class="profile-stat-count">164</span> posts</li>-->
+					<li><span class="profile-stat-count"><%=followResult.followers%></span> followers</li>
+					<li><span class="profile-stat-count"><%=followResult.following%></span> following</li>
+				</ul>
+
+			</div>
+
+			<div class="profile-bio">
+
+				<p><span class="profile-real-name"><%=data.fullname%></span> <%=data.bio%> 📷✈️🏕️</p>
+
+			</div>
+
+		</div>
+		<!-- End of profile section -->
+
+	</div>
+	<!-- End of container -->
+
+</header>
+
+<main>
+
+	<div class="container">
+
+		<div class="gallery">
+
+            <% for(var i=0; i < feedResult.length; i++) { %>
+
+			<div class="gallery-item" tabindex="0">
+
+				<img id="<%=feedResult[i].feedname%>" onclick="showFeed(this.id);return false;" src="profilepics/<%=feedResult[i].feedname%>" class="gallery-image" alt="">
+
+                <!--
+				<div class="gallery-item-info">
+
+					<ul>
+						<li class="gallery-item-likes"><span class="visually-hidden">Likes:</span><i class="fas fa-heart" aria-hidden="true"></i> 56</li>
+						<li class="gallery-item-comments"><span class="visually-hidden">Comments:</span><i class="fas fa-comment" aria-hidden="true"></i> 2</li>
+					</ul>
+
+				</div>
+                -->
+			</div>
+            <% } %>
+<!--
+			<div class="gallery-item" tabindex="0">
+
+				<img src="https://images.unsplash.com/photo-1497445462247-4330a224fdb1?w=500&h=500&fit=crop" class="gallery-image" alt="">
+
+				<div class="gallery-item-info">
+
+					<ul>
+						<li class="gallery-item-likes"><span class="visually-hidden">Likes:</span><i class="fas fa-heart" aria-hidden="true"></i> 89</li>
+						<li class="gallery-item-comments"><span class="visually-hidden">Comments:</span><i class="fas fa-comment" aria-hidden="true"></i> 5</li>
+					</ul>
+
+				</div>
+
+			</div>
+
+			<div class="gallery-item" tabindex="0">
+
+				<img src="https://images.unsplash.com/photo-1426604966848-d7adac402bff?w=500&h=500&fit=crop" class="gallery-image" alt="">
+
+				<div class="gallery-item-type">
+
+					<span class="visually-hidden">Gallery</span><i class="fas fa-clone" aria-hidden="true"></i>
+
+				</div>
+
+				<div class="gallery-item-info">
+
+					<ul>
+						<li class="gallery-item-likes"><span class="visually-hidden">Likes:</span><i class="fas fa-heart" aria-hidden="true"></i> 42</li>
+						<li class="gallery-item-comments"><span class="visually-hidden">Comments:</span><i class="fas fa-comment" aria-hidden="true"></i> 1</li>
+					</ul>
+
+				</div>
+
+			</div>
+
+			<div class="gallery-item" tabindex="0">
+
+				<img src="https://images.unsplash.com/photo-1502630859934-b3b41d18206c?w=500&h=500&fit=crop" class="gallery-image" alt="">
+
+				<div class="gallery-item-type">
+
+					<span class="visually-hidden">Video</span><i class="fas fa-video" aria-hidden="true"></i>
+
+				</div>
+
+				<div class="gallery-item-info">
+
+					<ul>
+						<li class="gallery-item-likes"><span class="visually-hidden">Likes:</span><i class="fas fa-heart" aria-hidden="true"></i> 38</li>
+						<li class="gallery-item-comments"><span class="visually-hidden">Comments:</span><i class="fas fa-comment" aria-hidden="true"></i> 0</li>
+					</ul>
+
+				</div>
+
+			</div>
+
+			<div class="gallery-item" tabindex="0">
+
+				<img src="https://images.unsplash.com/photo-1498471731312-b6d2b8280c61?w=500&h=500&fit=crop" class="gallery-image" alt="">
+
+				<div class="gallery-item-type">
+
+					<span class="visually-hidden">Gallery</span><i class="fas fa-clone" aria-hidden="true"></i>
+
+				</div>
+
+				<div class="gallery-item-info">
+
+					<ul>
+						<li class="gallery-item-likes"><span class="visually-hidden">Likes:</span><i class="fas fa-heart" aria-hidden="true"></i> 47</li>
+						<li class="gallery-item-comments"><span class="visually-hidden">Comments:</span><i class="fas fa-comment" aria-hidden="true"></i> 1</li>
+					</ul>
+
+				</div>
+
+			</div>
+
+			<div class="gallery-item" tabindex="0">
+
+				<img src="https://images.unsplash.com/photo-1515023115689-589c33041d3c?w=500&h=500&fit=crop" class="gallery-image" alt="">
+
+				<div class="gallery-item-info">
+
+					<ul>
+						<li class="gallery-item-likes"><span class="visually-hidden">Likes:</span><i class="fas fa-heart" aria-hidden="true"></i> 94</li>
+						<li class="gallery-item-comments"><span class="visually-hidden">Comments:</span><i class="fas fa-comment" aria-hidden="true"></i> 3</li>
+					</ul>
+
+				</div>
+
+			</div>
+
+			<div class="gallery-item" tabindex="0">
+
+				<img src="https://images.unsplash.com/photo-1504214208698-ea1916a2195a?w=500&h=500&fit=crop" class="gallery-image" alt="">
+
+				<div class="gallery-item-type">
+
+					<span class="visually-hidden">Gallery</span><i class="fas fa-clone" aria-hidden="true"></i>
+
+				</div>
+
+				<div class="gallery-item-info">
+
+					<ul>
+						<li class="gallery-item-likes"><span class="visually-hidden">Likes:</span><i class="fas fa-heart" aria-hidden="true"></i> 52</li>
+						<li class="gallery-item-comments"><span class="visually-hidden">Comments:</span><i class="fas fa-comment" aria-hidden="true"></i> 4</li>
+					</ul>
+
+				</div>
+
+			</div>
+
+			<div class="gallery-item" tabindex="0">
+
+				<img src="https://images.unsplash.com/photo-1515814472071-4d632dbc5d4a?w=500&h=500&fit=crop" class="gallery-image" alt="">
+
+				<div class="gallery-item-info">
+
+					<ul>
+						<li class="gallery-item-likes"><span class="visually-hidden">Likes:</span><i class="fas fa-heart" aria-hidden="true"></i> 66</li>
+						<li class="gallery-item-comments"><span class="visually-hidden">Comments:</span><i class="fas fa-comment" aria-hidden="true"></i> 2</li>
+					</ul>
+
+				</div>
+
+			</div>
+
+			<div class="gallery-item" tabindex="0">
+
+				<img src="https://images.unsplash.com/photo-1511407397940-d57f68e81203?w=500&h=500&fit=crop" class="gallery-image" alt="">
+
+				<div class="gallery-item-type">
+
+					<span class="visually-hidden">Gallery</span><i class="fas fa-clone" aria-hidden="true"></i>
+
+				</div>
+
+				<div class="gallery-item-info">
+
+					<ul>
+						<li class="gallery-item-likes"><span class="visually-hidden">Likes:</span><i class="fas fa-heart" aria-hidden="true"></i> 45</li>
+						<li class="gallery-item-comments"><span class="visually-hidden">Comments:</span><i class="fas fa-comment" aria-hidden="true"></i> 0</li>
+					</ul>
+
+				</div>
+
+			</div>
+
+			<div class="gallery-item" tabindex="0">
+
+				<img src="https://images.unsplash.com/photo-1518481612222-68bbe828ecd1?w=500&h=500&fit=crop" class="gallery-image" alt="">
+
+				<div class="gallery-item-info">
+
+					<ul>
+						<li class="gallery-item-likes"><span class="visually-hidden">Likes:</span><i class="fas fa-heart" aria-hidden="true"></i> 34</li>
+						<li class="gallery-item-comments"><span class="visually-hidden">Comments:</span><i class="fas fa-comment" aria-hidden="true"></i> 1</li>
+					</ul>
+
+				</div>
+
+			</div>
+
+			<div class="gallery-item" tabindex="0">
+
+				<img src="https://images.unsplash.com/photo-1505058707965-09a4469a87e4?w=500&h=500&fit=crop" class="gallery-image" alt="">
+
+				<div class="gallery-item-info">
+
+					<ul>
+						<li class="gallery-item-likes"><span class="visually-hidden">Likes:</span><i class="fas fa-heart" aria-hidden="true"></i> 41</li>
+						<li class="gallery-item-comments"><span class="visually-hidden">Comments:</span><i class="fas fa-comment" aria-hidden="true"></i> 0</li>
+					</ul>
+
+				</div>
+
+			</div>
+
+			<div class="gallery-item" tabindex="0">
+
+				<img src="https://images.unsplash.com/photo-1423012373122-fff0a5d28cc9?w=500&h=500&fit=crop" class="gallery-image" alt="">
+
+				<div class="gallery-item-type">
+
+					<span class="visually-hidden">Video</span><i class="fas fa-video" aria-hidden="true"></i>
+
+				</div>
+
+				<div class="gallery-item-info">
+
+					<ul>
+						<li class="gallery-item-likes"><span class="visually-hidden">Likes:</span><i class="fas fa-heart" aria-hidden="true"></i> 30</li>
+						<li class="gallery-item-comments"><span class="visually-hidden">Comments:</span><i class="fas fa-comment" aria-hidden="true"></i> 2</li>
+					</ul>
+
+				</div>
+
+			</div>
+-->
+		</div>
+		<!-- End of gallery -->
+
+	<!--	<div class="loader"></div>
+    -->
+	</div>
+	<!-- End of container -->
+
+</main>
+
 </body>
-
-</html>
+</html> 
