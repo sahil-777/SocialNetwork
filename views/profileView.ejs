@@ -137,18 +137,18 @@
 
 			<div class="gallery-item" tabindex="0">
 
-				<img id="<%=feedResult[i].feedname%>" onclick="showFeed(this.id);return false;" src="profilepics/<%=feedResult[i].feedname%>" class="gallery-image" alt="">
+				<img src="profilepics/<%=feedResult[i].feedname%>" class="gallery-image" alt="">
 
-                <!--
-				<div class="gallery-item-info">
+                
+				<div id="<%=feedResult[i].feedname%>"   onclick="showFeed(this.id);return false;" class="gallery-item-info" onclick="">
 
 					<ul>
-						<li class="gallery-item-likes"><span class="visually-hidden">Likes:</span><i class="fas fa-heart" aria-hidden="true"></i> 56</li>
-						<li class="gallery-item-comments"><span class="visually-hidden">Comments:</span><i class="fas fa-comment" aria-hidden="true"></i> 2</li>
+						<li class="gallery-item-likes"><span class="/*visually-hidden*/">Likes:</span><i class="fas fa-heart" aria-hidden="true"></i><%=feedResult[i].likes%> </li>
+						<li class="gallery-item-comments"><span class="/*visually-hidden*/">Comments:</span><i class="fas fa-comment" aria-hidden="true"></i> 2</li>
 					</ul>
 
 				</div>
-                -->
+                
 			</div>
             <% } %>
 <!--
