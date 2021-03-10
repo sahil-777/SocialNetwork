@@ -235,7 +235,9 @@ body{
       <!--<p>CAPTION</p>
       <button type="button" class="btn btn-default btn-xs"><i class="fa fa-share"></i> Share</button>
       -->
-      <input type="button" class="btn btn-default btn-sm" id="likeImage" value="<%=initialLikedDisliked%>" name="likeImage"><i class="fa fa-thumbs-o-up"></i> <%=initialLikedDisliked%>
+      <div class="btn btn-default btn-sm"> 
+        <i class="fa fa-thumbs-o-up fa-2x"></i><input type="button" style="border: none;font-size:larger;"  id="likeImage" value="<%=initialLikedDisliked%>" name="likeImage" />
+      </div>
       <span class="pull-right text-muted"><%=likeUserCreatedATCount.likes%> likes - <%=comments.length%> comments</span>
     </div>
     
