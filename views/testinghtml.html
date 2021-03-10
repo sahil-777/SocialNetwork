@@ -1,367 +1,570 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-	<meta charset="utf-8">
-        <meta charset="utf-8">
-        <meta http-equiv="X-UA-Compatible" content="IE=edge">
-        <meta name="viewport" content="width=device-width, initial-scale=1">
-    
-        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
-        <link rel="stylesheet" href="assets/css/profile.css">
-        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
 
-    <title>
-        Profile Page
-    </title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-    <script src="http://cdnjs.cloudflare.com/ajax/libs/jquery.form/3.51/jquery.form.min.js"></script>
-    <script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+
+<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+<script  type="text/javascript" src="../JS/typeahead.min.js"></script>
+<script src="http://code.jquery.com/jquery-1.10.2.min.js"></script>
+<script src="http://netdna.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
+<script src="https://use.fontawesome.com/cb2d0db4c2.js"></script>
+<script type="text/javascript">
         $(document).ready(function(){
-            $("#upload-Feed-Button").click(function(){
-                $("#upload-Feed-Form").toggle();
+            $('input.typeahead').typeahead({
+                name: 'countries',
+                remote: 'http://localhost:3000/profile/search?key=%QUERY',
+                limit: 10
+            });
+
+            $('#likeImage').click(function(){
+                //alert('Hii');
+                let flag=1;  
+                if($('#likeImage').val()=='dislike')
+                flag=0;
+
+
+                if($('#likeImage').val()=='like'){
+                    //$('#likeImage').html('dislike');
+                    $('#likeImage').attr('value',"dislike");
+                }
+                else{
+                    //$('#likeImage').html('like');
+                    $('#likeImage').attr('value',"like");
+                }
+                $.ajax({
+                    url: "/profile/postFeed/"+1+"/likeImage/"+flag, 
+                    type:"POST",
+                    timeout:500,
+                    //dataType:'json',
+                    success: function(){
+                        //
+                        alert('Liked!');
+                    },
+                    error:function(error){
+                        throw error;
+                    }
+                });
             });
             
-            $('#upload-Feed-Form').submit(function() {
-            $("#status").empty().text("Uploading...");
-            $(this).ajaxSubmit({
-                error: function(xhr) {
-                status('Error: ' + xhr.status);
-                },
-                success: function(response) {
-                $("#status").empty().text(response);
-                    console.log(response);
+            /*$(window).scroll(function() {
+                if($(window).scrollTop() == $(document).height() - $(window).height()) {
+                // ajax call get data from server and append to the div
+                    ('#add-data').append('<li>Main<li>')
                 }
-            });
-            //Very important line, it disables the page refresh.
-            return false;
-            });
-        });  
-
-        function showFeed(id){
+            });*/
+    });
+    function showFeed(id){
             window.location='/showfeed/'+id;
             return false;
-        }
-        
-    </script>
-    <style type="text/css">
-    input[type="file"] {
-    display: none;
     }
-    .custom-profile-pic-upload {
-    border: 1px solid #ccc;
-    display: inline-block;
-    padding: 6px 12px;
-    cursor: pointer;
-    background-color: #007BFF;
-    color: white;
-    border-radius: 4px;
+
+    function showAccount(username){
+            window.location='/account/'+username;
+            return false;
     }
-    .simple-btn {
-    border: 1px solid grey;
-    display: inline-block;
-    padding: 3px 12px;
-    cursor: pointer;
-    background-color: white;
-    border-radius: 4px;
+
+    function likeImage(feedname,data){
+                //alert(feedname);
+                let flag=1;  
+                if($(data).val()=='dislike')
+                flag=0;
+
+
+                if($(data).val()=='like'){
+                    //$(data).html('dislike');
+                    $(data).attr('value',"dislike");
+                }
+                else{
+                    //$(data).html('like');
+                    $(data).attr('value',"like");
+                }
+                $.ajax({
+                    url: "/profile/postFeed/"+feedname+"/likeImage/"+flag, 
+                    type:"POST",
+                    timeout:500,
+                    //dataType:'json',
+                    success: function(){
+                        //
+                        alert(url);
+                        //alert('Liked!');
+                    },
+                    error:function(error){
+                        throw error;
+                    }
+                });
     }
-    </style>
+
+     
+
+</script>
 </head>
 <body>
-
-
-<header>
-
-	<div class="container">
-
-		<div class="profile">
-
-			<div class="profile-image">
-
-				<img src="profilepics/<%=dpName%>" height="152px" width="152px" alt="">
-
-			</div>
-
-			<div class="profile-user-settings">
-
-				<h1 class="profile-user-name"><%=data.username%></h1>
-
-				<button class="btn profile-edit-btn"><a href="/profile/edit" style="color: black;text-decoration: none;">Edit Profile</a></button>
-
-				<!--<button class="btn profile-settings-btn" aria-label="profile settings"><i class="fas fa-cog" aria-hidden="true"></i></button>
-                -->
-                <!--<button class="btn profile-settings-btn" aria-label="profile settings"><i class="fas fa-cog" aria-hidden="true"></i>Hii</button>
-                -->
-                <button id="upload-Feed-Button" class="btn profile-edit-btn"><i class="fa fa-fw fa-camera"></i>Upload Feed</button><br><br>
-                <form id="upload-Feed-Form" hidden action="/profile/postFeed" method="POST" enctype="multipart/form-data">
-                    <label for="upload-File" class="custom-profile-pic-upload">
-                        <i class="fa fa-fw fa-camera"></i> Upload
-                    </label>
-                    <input id="upload-File" type="file" name="userFeed" value="Upload File" />
-                    <input class="simple-btn" type="submit" id="upload-Feed" name="Upload" />
-                    <span id = "status"></span>
-                </form>
-			</div>
-
-			<div class="profile-stats">
-
-				<ul>
-					<!--<li><span class="profile-stat-count">164</span> posts</li>-->
-					<li><span class="profile-stat-count"><%=followResult.followers%></span> followers</li>
-					<li><span class="profile-stat-count"><%=followResult.following%></span> following</li>
-				</ul>
-
-			</div>
-
-			<div class="profile-bio">
-
-				<p><span class="profile-real-name"><%=data.fullname%></span> <%=data.bio%> 📷✈️🏕️</p>
-
-			</div>
-
-		</div>
-		<!-- End of profile section -->
-
-	</div>
-	<!-- End of container -->
-
-</header>
-
-<main>
-
-	<div class="container">
-
-		<div class="gallery">
-
-            <% for(var i=0; i < feedResult.length; i++) { %>
-
-			<div class="gallery-item" tabindex="0">
-
-				<img src="profilepics/<%=feedResult[i].feedname%>" class="gallery-image" alt="">
-
-                
-				<div id="<%=feedResult[i].feedname%>"   onclick="showFeed(this.id);return false;" class="gallery-item-info" onclick="">
-
-					<ul>
-						<li class="gallery-item-likes"><span class="/*visually-hidden*/">Likes:</span><i class="fas fa-heart" aria-hidden="true"></i><%=feedResult[i].likes%> </li>
-						<li class="gallery-item-comments"><span class="/*visually-hidden*/">Comments:</span><i class="fas fa-comment" aria-hidden="true"></i> 2</li>
-					</ul>
-
-				</div>
-                
-			</div>
-            <% } %>
-<!--
-			<div class="gallery-item" tabindex="0">
-
-				<img src="https://images.unsplash.com/photo-1497445462247-4330a224fdb1?w=500&h=500&fit=crop" class="gallery-image" alt="">
-
-				<div class="gallery-item-info">
-
-					<ul>
-						<li class="gallery-item-likes"><span class="visually-hidden">Likes:</span><i class="fas fa-heart" aria-hidden="true"></i> 89</li>
-						<li class="gallery-item-comments"><span class="visually-hidden">Comments:</span><i class="fas fa-comment" aria-hidden="true"></i> 5</li>
-					</ul>
-
-				</div>
-
-			</div>
-
-			<div class="gallery-item" tabindex="0">
-
-				<img src="https://images.unsplash.com/photo-1426604966848-d7adac402bff?w=500&h=500&fit=crop" class="gallery-image" alt="">
-
-				<div class="gallery-item-type">
-
-					<span class="visually-hidden">Gallery</span><i class="fas fa-clone" aria-hidden="true"></i>
-
-				</div>
-
-				<div class="gallery-item-info">
-
-					<ul>
-						<li class="gallery-item-likes"><span class="visually-hidden">Likes:</span><i class="fas fa-heart" aria-hidden="true"></i> 42</li>
-						<li class="gallery-item-comments"><span class="visually-hidden">Comments:</span><i class="fas fa-comment" aria-hidden="true"></i> 1</li>
-					</ul>
-
-				</div>
-
-			</div>
-
-			<div class="gallery-item" tabindex="0">
-
-				<img src="https://images.unsplash.com/photo-1502630859934-b3b41d18206c?w=500&h=500&fit=crop" class="gallery-image" alt="">
-
-				<div class="gallery-item-type">
-
-					<span class="visually-hidden">Video</span><i class="fas fa-video" aria-hidden="true"></i>
-
-				</div>
-
-				<div class="gallery-item-info">
-
-					<ul>
-						<li class="gallery-item-likes"><span class="visually-hidden">Likes:</span><i class="fas fa-heart" aria-hidden="true"></i> 38</li>
-						<li class="gallery-item-comments"><span class="visually-hidden">Comments:</span><i class="fas fa-comment" aria-hidden="true"></i> 0</li>
-					</ul>
-
-				</div>
-
-			</div>
-
-			<div class="gallery-item" tabindex="0">
-
-				<img src="https://images.unsplash.com/photo-1498471731312-b6d2b8280c61?w=500&h=500&fit=crop" class="gallery-image" alt="">
-
-				<div class="gallery-item-type">
-
-					<span class="visually-hidden">Gallery</span><i class="fas fa-clone" aria-hidden="true"></i>
-
-				</div>
-
-				<div class="gallery-item-info">
-
-					<ul>
-						<li class="gallery-item-likes"><span class="visually-hidden">Likes:</span><i class="fas fa-heart" aria-hidden="true"></i> 47</li>
-						<li class="gallery-item-comments"><span class="visually-hidden">Comments:</span><i class="fas fa-comment" aria-hidden="true"></i> 1</li>
-					</ul>
-
-				</div>
-
-			</div>
-
-			<div class="gallery-item" tabindex="0">
-
-				<img src="https://images.unsplash.com/photo-1515023115689-589c33041d3c?w=500&h=500&fit=crop" class="gallery-image" alt="">
-
-				<div class="gallery-item-info">
-
-					<ul>
-						<li class="gallery-item-likes"><span class="visually-hidden">Likes:</span><i class="fas fa-heart" aria-hidden="true"></i> 94</li>
-						<li class="gallery-item-comments"><span class="visually-hidden">Comments:</span><i class="fas fa-comment" aria-hidden="true"></i> 3</li>
-					</ul>
-
-				</div>
-
-			</div>
-
-			<div class="gallery-item" tabindex="0">
-
-				<img src="https://images.unsplash.com/photo-1504214208698-ea1916a2195a?w=500&h=500&fit=crop" class="gallery-image" alt="">
-
-				<div class="gallery-item-type">
-
-					<span class="visually-hidden">Gallery</span><i class="fas fa-clone" aria-hidden="true"></i>
-
-				</div>
-
-				<div class="gallery-item-info">
-
-					<ul>
-						<li class="gallery-item-likes"><span class="visually-hidden">Likes:</span><i class="fas fa-heart" aria-hidden="true"></i> 52</li>
-						<li class="gallery-item-comments"><span class="visually-hidden">Comments:</span><i class="fas fa-comment" aria-hidden="true"></i> 4</li>
-					</ul>
-
-				</div>
-
-			</div>
-
-			<div class="gallery-item" tabindex="0">
-
-				<img src="https://images.unsplash.com/photo-1515814472071-4d632dbc5d4a?w=500&h=500&fit=crop" class="gallery-image" alt="">
-
-				<div class="gallery-item-info">
-
-					<ul>
-						<li class="gallery-item-likes"><span class="visually-hidden">Likes:</span><i class="fas fa-heart" aria-hidden="true"></i> 66</li>
-						<li class="gallery-item-comments"><span class="visually-hidden">Comments:</span><i class="fas fa-comment" aria-hidden="true"></i> 2</li>
-					</ul>
-
-				</div>
-
-			</div>
-
-			<div class="gallery-item" tabindex="0">
-
-				<img src="https://images.unsplash.com/photo-1511407397940-d57f68e81203?w=500&h=500&fit=crop" class="gallery-image" alt="">
-
-				<div class="gallery-item-type">
-
-					<span class="visually-hidden">Gallery</span><i class="fas fa-clone" aria-hidden="true"></i>
-
-				</div>
-
-				<div class="gallery-item-info">
-
-					<ul>
-						<li class="gallery-item-likes"><span class="visually-hidden">Likes:</span><i class="fas fa-heart" aria-hidden="true"></i> 45</li>
-						<li class="gallery-item-comments"><span class="visually-hidden">Comments:</span><i class="fas fa-comment" aria-hidden="true"></i> 0</li>
-					</ul>
-
-				</div>
-
-			</div>
-
-			<div class="gallery-item" tabindex="0">
-
-				<img src="https://images.unsplash.com/photo-1518481612222-68bbe828ecd1?w=500&h=500&fit=crop" class="gallery-image" alt="">
-
-				<div class="gallery-item-info">
-
-					<ul>
-						<li class="gallery-item-likes"><span class="visually-hidden">Likes:</span><i class="fas fa-heart" aria-hidden="true"></i> 34</li>
-						<li class="gallery-item-comments"><span class="visually-hidden">Comments:</span><i class="fas fa-comment" aria-hidden="true"></i> 1</li>
-					</ul>
-
-				</div>
-
-			</div>
-
-			<div class="gallery-item" tabindex="0">
-
-				<img src="https://images.unsplash.com/photo-1505058707965-09a4469a87e4?w=500&h=500&fit=crop" class="gallery-image" alt="">
-
-				<div class="gallery-item-info">
-
-					<ul>
-						<li class="gallery-item-likes"><span class="visually-hidden">Likes:</span><i class="fas fa-heart" aria-hidden="true"></i> 41</li>
-						<li class="gallery-item-comments"><span class="visually-hidden">Comments:</span><i class="fas fa-comment" aria-hidden="true"></i> 0</li>
-					</ul>
-
-				</div>
-
-			</div>
-
-			<div class="gallery-item" tabindex="0">
-
-				<img src="https://images.unsplash.com/photo-1423012373122-fff0a5d28cc9?w=500&h=500&fit=crop" class="gallery-image" alt="">
-
-				<div class="gallery-item-type">
-
-					<span class="visually-hidden">Video</span><i class="fas fa-video" aria-hidden="true"></i>
-
-				</div>
-
-				<div class="gallery-item-info">
-
-					<ul>
-						<li class="gallery-item-likes"><span class="visually-hidden">Likes:</span><i class="fas fa-heart" aria-hidden="true"></i> 30</li>
-						<li class="gallery-item-comments"><span class="visually-hidden">Comments:</span><i class="fas fa-comment" aria-hidden="true"></i> 2</li>
-					</ul>
-
-				</div>
-
-			</div>
--->
-		</div>
-		<!-- End of gallery -->
-
-	<!--	<div class="loader"></div>
-    -->
-	</div>
-	<!-- End of container -->
-
-</main>
-
+    <div class="container">
+    <nav class="navbar navbar-default navbar-fixed-top navbar-inverse">
+                    <div class="container">
+                        <!-- Brand and toggle get grouped for better mobile display -->
+                        <div class="navbar-header">
+                            <button aria-expanded="false" class="navbar-toggle collapsed" data-target="#bs-example-navbar-collapse-1" data-toggle="collapse" type="button">
+                                <span class="sr-only">
+                                    Toggle navigation
+                                </span>
+                                <span class="icon-bar">
+                                </span>
+                                <span class="icon-bar">
+                                </span>
+                                <span class="icon-bar">
+                                </span>
+                            </button>
+                            <a class="navbar-brand" href="#">
+                                Brand
+                            </a>
+                        </div>
+                        <!-- Search Navbar -->
+                        <form class="navbar-form navbar-left search-container hidden-xs" role="search">
+                            <div class="form-group">
+                                <input class="form-control" placeholder="Search" type="text">
+                                </input>
+                            </div>
+                            <button class="btn btn-default btn-search" type="submit">
+                                <i aria-hidden="true" class="fa fa-search text-center">
+                                </i>
+                            </button>
+                        </form>
+                        <!--END Search navbar -->
+                        <!-- Collect the nav links, forms, and other content for toggling -->
+                        <div class="collapse navbar-collapse navbar-right" id="bs-example-navbar-collapse-1">
+                            <ul class="nav navbar-nav navbar-left">
+                                <!--Search xs -->
+                                <li class="visible-xs ">
+                                    <form class="navbar-form navbar-left search-xs" role="search">
+                                        <div class="form-group">
+                                            <input class="form-control" placeholder="Search" type="text">
+                                            </input>
+                                        </div>
+                                        <button class="btn btn-default search-btn-xs pull-right" type="submit">
+                                            Submit
+                                        </button>
+                                    </form>
+                                </li>
+                                <!-- END Search xs -->
+                                <li class="active">
+                                    <a href="#">
+                                        Home
+                                        <span class="sr-only">
+                                            (current)
+                                        </span>
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="#">
+                                        Profile
+                                    </a>
+                                </li>
+                                <li data-placement="bottom" data-toggle="tooltip" title="Friend requests">
+                                    <a href="">
+                                        <i aria-hidden="true" class="fa fa-user">
+                                        </i>
+                                    </a>
+                                </li>
+                                <li data-placement="bottom" data-toggle="tooltip" title="Messages">
+                                    <a href="">
+                                        <i aria-hidden="true" class="fa fa-envelope-o">
+                                        </i>
+                                    </a>
+                                </li>
+                                <li data-placement="bottom" data-toggle="tooltip" title="Notifications">
+                                    <a href="">
+                                        <i aria-hidden="true" class="fa fa-globe">
+                                        </i>
+                                    </a>
+                                </li>
+                                <li class="dropdown">
+                                    <a aria-expanded="false" aria-haspopup="true" class="dropdown-toggle" data-toggle="dropdown" href="#" role="button">
+                                        <i aria-hidden="true" class="fa fa-wrench">
+                                        </i>
+                                        <span class="caret">
+                                        </span>
+                                    </a>
+                                    <ul class="dropdown-menu">
+                                        <li>
+                                            <a href="config.html">
+                                                Configurations
+                                            </a>
+                                        </li>
+                                        <li>
+                                            <a href="#">
+                                                Another action
+                                            </a>
+                                        </li>
+                                        <li>
+                                            <a href="#">
+                                                Something else here
+                                            </a>
+                                        </li>
+                                        <li class="divider" role="separator">
+                                        </li>
+                                        <li>
+                                            <a href="#">
+                                                About
+                                            </a>
+                                        </li>
+                                        <li class="divider" role="separator">
+                                        </li>
+                                        <li>
+                                            <a data-target="#myModal" data-toggle="modal" href="#myModal">
+                                                <i aria-hidden="true" class="fa fa-sign-out">
+                                                </i>
+                                                Exit
+                                            </a>
+                                        </li>
+                                    </ul>
+                                </li>
+                            </ul>
+                        </div>
+                        <!-- /.navbar-collxapse -->
+                    </div>
+                    <!-- /.container-fluid -->
+                </nav>
+                <!-- Configuration Modal -->
+                <div class="modal fade" id="myModal" role="dialog" tabindex="-1">
+                    <div class="modal-dialog" role="document">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <button aria-label="Close" class="close" data-dismiss="modal" type="button">
+                                    <span aria-hidden="true">
+                                        ×
+                                    </span>
+                                </button>
+                                <h4 class="modal-title">
+                                    <i aria-hidden="true" class="fa fa-sign-out">
+                                    </i>
+                                    Exit
+                                </h4>
+                            </div>
+                            <div class="modal-body">
+                                <p>
+                                    Are you sure you want to quit?
+                                </p>
+                            </div>
+                            <div class="modal-footer">
+                                <button class="btn btn-default" data-dismiss="modal" type="button">
+                                    Close
+                                </button>
+                                <button class="btn btn-primary" type="button">
+                                    Exit
+                                </button>
+                            </div>
+                        </div>
+                        <!-- /.modal-content -->
+                    </div>
+                    <!-- /.modal-dialog -->
+                </div>
+                <!-- Configuration modal -->
+    </div>
+    
+
+     
+    
+
+    <div id="load-feed">
+        <% for(var i=0; i < feedResult.length; i++) { %>
+            <label onclick="showAccount('<%=feedResult[i].username%>')"><%=feedResult[i].username%></label><br>
+            <img id="<%=feedResult[i].feedname%>" onclick="showFeed(this.id);return false;"  src="profilepics/<%=feedResult[i].feedname%>" height="500px" width="500px"><br>
+            <input type="button" id="like-btn-<%=feedResult[i].feedname%>" onclick="likeImage('<%=feedResult[i].feedname%>',this)" value="<%=feedResult[i].isliked%>" >
+            <button onclick="showFeed('<%=feedResult[i].feedname%>')">Comment</button>
+            <br><br>
+            &nbsp;&nbsp;&nbsp;&nbsp;
+        <% } %>
+    </div>
+    <script>
+        $('#search-user-form').submit(function(){
+        let username = $('#search-text').val();
+        //alert(username);
+        $(this).attr('action', "/account/" + username);
+        }); 
+    </script>
 </body>
-</html> 
+</html>
+
+
+
+<!--
+    HomePage!
+    <form id="homeForm" action="/login" method="GET">
+        <input type="submit" value="Logout">  
+    </form>
+
+    <form id="homeForm" action="/profile" method="GET">
+        <input type="submit" value="Profile">
+    </form>
+-->
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+
+<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+<script  type="text/javascript" src="../JS/typeahead.min.js"></script>
+<script src="http://code.jquery.com/jquery-1.10.2.min.js"></script>
+<script src="http://netdna.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
+<script src="https://use.fontawesome.com/cb2d0db4c2.js"></script>
+<script type="text/javascript">
+        $(document).ready(function(){
+            $('input.typeahead').typeahead({
+                name: 'countries',
+                remote: 'http://localhost:3000/profile/search?key=%QUERY',
+                limit: 10
+            });
+
+            $('#likeImage').click(function(){
+                //alert('Hii');
+                let flag=1;  
+                if($('#likeImage').val()=='dislike')
+                flag=0;
+
+
+                if($('#likeImage').val()=='like'){
+                    //$('#likeImage').html('dislike');
+                    $('#likeImage').attr('value',"dislike");
+                }
+                else{
+                    //$('#likeImage').html('like');
+                    $('#likeImage').attr('value',"like");
+                }
+                $.ajax({
+                    url: "/profile/postFeed/"+1+"/likeImage/"+flag, 
+                    type:"POST",
+                    timeout:500,
+                    //dataType:'json',
+                    success: function(){
+                        //
+                        alert('Liked!');
+                    },
+                    error:function(error){
+                        throw error;
+                    }
+                });
+            });
+            
+            /*$(window).scroll(function() {
+                if($(window).scrollTop() == $(document).height() - $(window).height()) {
+                // ajax call get data from server and append to the div
+                    ('#add-data').append('<li>Main<li>')
+                }
+            });*/
+    });
+    function showFeed(id){
+            window.location='/showfeed/'+id;
+            return false;
+    }
+
+    function showAccount(username){
+            window.location='/account/'+username;
+            return false;
+    }
+
+    function likeImage(feedname,data){
+                //alert(feedname);
+                let flag=1;  
+                if($(data).val()=='dislike')
+                flag=0;
+
+
+                if($(data).val()=='like'){
+                    //$(data).html('dislike');
+                    $(data).attr('value',"dislike");
+                }
+                else{
+                    //$(data).html('like');
+                    $(data).attr('value',"like");
+                }
+                $.ajax({
+                    url: "/profile/postFeed/"+feedname+"/likeImage/"+flag, 
+                    type:"POST",
+                    timeout:500,
+                    //dataType:'json',
+                    success: function(){
+                        //
+                        alert(url);
+                        //alert('Liked!');
+                    },
+                    error:function(error){
+                        throw error;
+                    }
+                });
+    }
+
+     
+
+</script>
+</head>
+<body>
+    <input type="text" id="search-text" class="typeahead tt-query" name="typeahead" autocomplete="off" spellcheck="false" placeholder="Type username">
+
+    <div class="container">
+    <nav class="navbar navbar-default navbar-fixed-top navbar-inverse">
+                    <div class="container">
+                        <!-- Brand and toggle get grouped for better mobile display -->
+                        <div class="navbar-header">
+                            <button aria-expanded="false" class="navbar-toggle collapsed" data-target="#bs-example-navbar-collapse-1" data-toggle="collapse" type="button">
+                                <span class="sr-only">
+                                    Toggle navigation
+                                </span>
+                                <span class="icon-bar">
+                                </span>
+                                <span class="icon-bar">
+                                </span>
+                                <span class="icon-bar">
+                                </span>
+                            </button>
+                            <a class="navbar-brand" href="#">
+                                Social-Network-Logo
+                            </a>
+                        </div>
+                        <!-- Search Navbar -->
+                        <form class="navbar-form navbar-left search-container hidden-xs" role="search">
+                            <div class="form-group">
+                                <!--<input class="form-control" placeholder="Search" type="text">
+                                </input>-->
+                                <input type="text" id="search-text" class="typeahead tt-query" name="typeahead" autocomplete="off" spellcheck="false" placeholder="Type username">
+
+                            </div>
+                            <button class="btn btn-default btn-search" type="submit">
+                                <i aria-hidden="true" class="fa fa-search text-center">
+                                </i>
+                            </button>
+                        </form>
+                        <!--END Search navbar -->
+                        <!-- Collect the nav links, forms, and other content for toggling -->
+                        <div class="collapse navbar-collapse navbar-right" id="bs-example-navbar-collapse-1">
+                            <ul class="nav navbar-nav navbar-left">
+                                <!--Search xs -->
+                                <li class="visible-xs ">
+                                    <form class="navbar-form navbar-left search-xs" role="search">
+                                        <div class="form-group">
+                                            <input class="form-control" placeholder="Search" type="text">
+                                            </input>
+                                        </div>
+                                        <button class="btn btn-default search-btn-xs pull-right" type="submit">
+                                            Submit
+                                        </button>
+                                    </form>
+                                </li>
+                                <!-- END Search xs -->
+                                <li class="active"><a href="/">Home</a></li>
+                                <li><a href="/profile">Profile</a></li>
+                                <li><a href="/login">Logout</a></li>
+                            </ul>
+                        </div>
+                        <!-- /.navbar-collxapse -->
+                    </div>
+                    <!-- /.container-fluid -->
+                </nav>
+                <!-- Configuration Modal -->
+                <div class="modal fade" id="myModal" role="dialog" tabindex="-1">
+                    <div class="modal-dialog" role="document">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <button aria-label="Close" class="close" data-dismiss="modal" type="button">
+                                    <span aria-hidden="true">
+                                        ×
+                                    </span>
+                                </button>
+                                <h4 class="modal-title">
+                                    <i aria-hidden="true" class="fa fa-sign-out">
+                                    </i>
+                                    Exit
+                                </h4>
+                            </div>
+                            <div class="modal-body">
+                                <p>
+                                    Are you sure you want to quit?
+                                </p>
+                            </div>
+                            <div class="modal-footer">
+                                <button class="btn btn-default" data-dismiss="modal" type="button">
+                                    Close
+                                </button>
+                                <button class="btn btn-primary" type="button">
+                                    Exit
+                                </button>
+                            </div>
+                        </div>
+                        <!-- /.modal-content -->
+                    </div>
+                    <!-- /.modal-dialog -->
+                </div>
+                <!-- Configuration modal -->
+    </div>
+    
+
+     
+    
+
+    <div id="load-feed">
+        <% for(var i=0; i < feedResult.length; i++) { %>
+            <label onclick="showAccount('<%=feedResult[i].username%>')"><%=feedResult[i].username%></label><br>
+            <img id="<%=feedResult[i].feedname%>" onclick="showFeed(this.id);return false;"  src="profilepics/<%=feedResult[i].feedname%>" height="500px" width="500px"><br>
+            <input type="button" id="like-btn-<%=feedResult[i].feedname%>" onclick="likeImage('<%=feedResult[i].feedname%>',this)" value="<%=feedResult[i].isliked%>" >
+            <button onclick="showFeed('<%=feedResult[i].feedname%>')">Comment</button>
+            <br><br>
+            &nbsp;&nbsp;&nbsp;&nbsp;
+        <% } %>
+    </div>
+    <script>
+        $('#search-user-form').submit(function(){
+        let username = $('#search-text').val();
+        //alert(username);
+        $(this).attr('action', "/account/" + username);
+        }); 
+    </script>
+</body>
+</html>
+
+
+
+<!--
+    HomePage!
+    <form id="homeForm" action="/login" method="GET">
+        <input type="submit" value="Logout">  
+    </form>
+
+    <form id="homeForm" action="/profile" method="GET">
+        <input type="submit" value="Profile">
+    </form>
+-->
