@@ -1,5 +1,5 @@
 const connection = require('../config');
-
+const moments = require('moment');  
 class showFeedController{
     displayFeed (req,res){
         //console.log(req.session.num);
@@ -17,20 +17,23 @@ class showFeedController{
                     initialLikedDisliked="dislike";
                 
                 //console.log(initialLikedDisliked);
-                let sqlQuery1="SELECT * FROM commentinfo WHERE feedname='"+req.params['id']+"'";
+                let sqlQuery1="SELECT * FROM commentinfo WHERE feedname='"+req.params['id']+"' ORDER BY created_at DESC";
                 connection.query(sqlQuery1,(error,comments)=>{
                     if(error) throw error;
                     /*console.log('Comments Data =>')
-                    for(let i=0;i<comments.length;i++){
-                        console.log(comments[i]);
-                        console.log('\n');    
-                        comments[i].commentby=req.session.username;
+                     for(let i=0;i<comments.length;i++){
+                        let dateTime=JSON.stringify(comments[i].created_at);
+                        dateTime=dateTime.split('.');
+                        dateTime=dateTime[0].split('"');
+                        comments[i].created_at=dateTime[1];
+                        console.log(dateTime[0]);
                     }*/
+                    //console.log(comments);
                     let likeCountQuery="SELECT likes,username,created_at FROM userfeed WHERE feedname='"+req.params['id']+"'";
                     connection.query(likeCountQuery,(error,likeUserCreatedATCount)=>{
                         if(error) throw error;
                         console.log(likeUserCreatedATCount[0]);
-                        return res.render('showFeedView',{ likeUserCreatedATCount:likeUserCreatedATCount[0],postId:req.params['id'],initialLikedDisliked:initialLikedDisliked,comments:comments});  
+                        return res.render('showFeedView',{ moment:moments,likeUserCreatedATCount:likeUserCreatedATCount[0],postId:req.params['id'],initialLikedDisliked:initialLikedDisliked,comments:comments});  
                     })
                 });
             });
@@ -112,7 +115,7 @@ class showFeedController{
             console.log(commentData);
             return res.redirect('/showfeed/'+commentData.feedname);
         });
-        return res.redirect('/showfeed/'+commentData.feedname);
+        //return res.redirect('/showfeed/'+commentData.feedname);
 
     };
 }
