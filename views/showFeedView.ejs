@@ -24,8 +24,6 @@ $(document).ready(function(){
             let flag=1;  
             if($('#likeImage').val()=='dislike')
             flag=0;
-
-
             if($('#likeImage').val()=='like'){
                 //$('#likeImage').html('dislike');
                 $('#likeImage').attr('value',"dislike");
@@ -48,7 +46,6 @@ $(document).ready(function(){
                 }
             });
         });
-
         $('#commentImage').click(function(){
             $('#commentSection').toggle();
             $('#loadComments').toggle();
@@ -74,18 +71,15 @@ $(document).ready(function(){
             });
         });
     });
-
     function showAccount(username){
         window.location='/account/'+username;
         return false;
     }
-
   
 </script>
 
     
     <style type="text/css">
-
 body{
     margin-top:20px;
     position: absolute;
@@ -256,7 +250,6 @@ body{
           <%= comments[i].commenttext %>
         </div>
       </div>
-
       <% } %>
 
       <!--
