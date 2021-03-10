@@ -4,12 +4,8 @@
     <meta charset="utf-8">
     <!--  This file has been downloaded from bootdey.com    @bootdey on twitter -->
     <!--  All snippets are MIT license http://bootdey.com/license -->
-    <title>Social network post image - Bootdey.com</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link href="http://netdna.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" rel="stylesheet">
-    <meta charset="utf-8">
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
@@ -19,9 +15,8 @@
 <title>
     View Pic
 </title>
-</head>
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 <script src="http://cdnjs.cloudflare.com/ajax/libs/jquery.form/3.51/jquery.form.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.15.2/moment.min.js"></script>
 <script>
 $(document).ready(function(){
     $('#likeImage').click(function(){
@@ -65,12 +60,12 @@ $(document).ready(function(){
             //$("#status").empty().text("File is uploading...");
             $(this).ajaxSubmit({
                 error: function(xhr) {
-                  alert("Error while posting comment 1");
+                  //alert("Error while posting comment 1");
                 status('Error: ' + xhr.status);
                 },
                 success: function(response) {
                 $("#status").empty().text(response);
-                alert("Error while posting comment 2");
+                //alert("Error while posting comment 2");
                     console.log(response);
                 }
             });
@@ -216,23 +211,22 @@ body{
     </style>
 </head>
 <body>
-
 <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css" rel="stylesheet">
 <div class="container bootstrap snippets bootdey">
 <div class="col-md-8">
   <div class="box box-widget">
     <div class="box-header with-border">
       <div class="user-block">
-        <img class="img-circle" src="https://bootdey.com/img/Content/avatar/avatar1.png" alt="User Image">
+        <img class="img-circle" src="/profilepics/<%=profilePic%>" alt="User Image">
         <span class="username"><a href="/account/<%=likeUserCreatedATCount.username%>"><%=likeUserCreatedATCount.username%></a></span>
-        <span class="description">Shared publicly - <%=likeUserCreatedATCount.created_at%></span>
+        <span class="description">Shared publicly - <%=moment(likeUserCreatedATCount.created_at).fromNow()%></span>
       </div>
       <div class="box-tools"> 
       <!--  <button type="button" class="btn btn-box-tool" data-toggle="tooltip" title="" data-original-title="Mark as read">
         <i class="fa fa-circle-o"></i></button>
         <button type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i>
         </button>-->
-        <button type="button" class="btn btn-box-tool" data-widget="remove"><a href="/"><i class="fa fa-times"></i></button>
+        <button type="button" class="btn btn-box-tool" data-widget="remove"><a href="/"><i class="fa fa-times"></i></a></button>
       </div>
     </div>
 
@@ -253,7 +247,7 @@ body{
         <div class="comment-text">
           <span class="username"><a class="username" style="color:royalblue;" href="/account/<%= comments[i].commentby %>">
             <%= comments[i].commentby %></a>
-          <span class="text-muted pull-right"><%=comments[i].created_at%></span>
+          <span class="text-muted pull-right"><%=moment(comments[i].created_at).fromNow() %></span>
           </span>
           <%= comments[i].commenttext %>
         </div>
@@ -288,11 +282,5 @@ body{
   </div>
 </div>
 </div>
-<script src="http://code.jquery.com/jquery-1.10.2.min.js"></script>
-<script src="http://netdna.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
-<script type="text/javascript">
-	
-
-</script>
 </body>
 </html>

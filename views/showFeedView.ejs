@@ -217,7 +217,7 @@ body{
   <div class="box box-widget">
     <div class="box-header with-border">
       <div class="user-block">
-        <img class="img-circle" src="https://bootdey.com/img/Content/avatar/avatar1.png" alt="User Image">
+        <img class="img-circle" src="/profilepics/<%=profilePic%>" alt="User Image">
         <span class="username"><a href="/account/<%=likeUserCreatedATCount.username%>"><%=likeUserCreatedATCount.username%></a></span>
         <span class="description">Shared publicly - <%=moment(likeUserCreatedATCount.created_at).fromNow()%></span>
       </div>
@@ -226,7 +226,7 @@ body{
         <i class="fa fa-circle-o"></i></button>
         <button type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i>
         </button>-->
-        <button type="button" class="btn btn-box-tool" data-widget="remove"><a href="/"><i class="fa fa-times"></i></button>
+        <button type="button" class="btn btn-box-tool" data-widget="remove"><a href="/"><i class="fa fa-times"></i></a></button>
       </div>
     </div>
 
@@ -235,7 +235,9 @@ body{
       <!--<p>CAPTION</p>
       <button type="button" class="btn btn-default btn-xs"><i class="fa fa-share"></i> Share</button>
       -->
-      <input type="button" class="btn btn-default btn-sm" id="likeImage" value="<%=initialLikedDisliked%>" name="likeImage"><i class="fa fa-thumbs-o-up"></i> <%=initialLikedDisliked%>
+      <div class="btn btn-default btn-sm"> 
+        <i class="fa fa-thumbs-o-up fa-2x"></i><input type="button" style="border: none;font-size:larger;"  id="likeImage" value="<%=initialLikedDisliked%>" name="likeImage" />
+      </div>
       <span class="pull-right text-muted"><%=likeUserCreatedATCount.likes%> likes - <%=comments.length%> comments</span>
     </div>
     

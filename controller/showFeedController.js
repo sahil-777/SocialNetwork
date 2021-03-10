@@ -33,7 +33,15 @@ class showFeedController{
                     connection.query(likeCountQuery,(error,likeUserCreatedATCount)=>{
                         if(error) throw error;
                         console.log(likeUserCreatedATCount[0]);
-                        return res.render('showFeedView',{ moment:moments,likeUserCreatedATCount:likeUserCreatedATCount[0],postId:req.params['id'],initialLikedDisliked:initialLikedDisliked,comments:comments});  
+                        let feedCreaterQuery="SELECT profilepic FROM userinfo WHERE username='"+req.session.username+"'";
+                        connection.query(feedCreaterQuery,(error,profilePicResult)=>{
+                            if(error) throw error;
+                            //console.log(profilePicResult[0]);
+                            let imageName=profilePicResult[0].profilepic;
+                            if(typeof imageName=='object'){ imageName = "default_profilepic.png"; }
+                            console.log(imageName);
+                            return res.render('showFeedView',{ moment:moments,profilePic:imageName,likeUserCreatedATCount:likeUserCreatedATCount[0],postId:req.params['id'],initialLikedDisliked:initialLikedDisliked,comments:comments});  
+                        })
                     })
                 });
             });
