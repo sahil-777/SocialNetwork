@@ -2,334 +2,12 @@
 <html lang="en">
 <head>
     <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <!--  This file has been downloaded from bootdey.com    @bootdey on twitter -->
+    <!--  All snippets are MIT license http://bootdey.com/license -->
+    <title>Social network post image - Bootdey.com</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
-
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
-
-<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
-<script  type="text/javascript" src="../JS/typeahead.min.js"></script>
-<script src="http://code.jquery.com/jquery-1.10.2.min.js"></script>
-<script src="http://netdna.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
-<script src="https://use.fontawesome.com/cb2d0db4c2.js"></script>
-<script type="text/javascript">
-        $(document).ready(function(){
-            $('input.typeahead').typeahead({
-                name: 'countries',
-                remote: 'http://localhost:3000/profile/search?key=%QUERY',
-                limit: 10
-            });
-
-            $('#likeImage').click(function(){
-                //alert('Hii');
-                let flag=1;  
-                if($('#likeImage').val()=='dislike')
-                flag=0;
-
-
-                if($('#likeImage').val()=='like'){
-                    //$('#likeImage').html('dislike');
-                    $('#likeImage').attr('value',"dislike");
-                }
-                else{
-                    //$('#likeImage').html('like');
-                    $('#likeImage').attr('value',"like");
-                }
-                $.ajax({
-                    url: "/profile/postFeed/"+1+"/likeImage/"+flag, 
-                    type:"POST",
-                    timeout:500,
-                    //dataType:'json',
-                    success: function(){
-                        //
-                        alert('Liked!');
-                    },
-                    error:function(error){
-                        throw error;
-                    }
-                });
-            });
-            
-            /*$(window).scroll(function() {
-                if($(window).scrollTop() == $(document).height() - $(window).height()) {
-                // ajax call get data from server and append to the div
-                    ('#add-data').append('<li>Main<li>')
-                }
-            });*/
-    });
-    function showFeed(id){
-            window.location='/showfeed/'+id;
-            return false;
-    }
-
-    function showAccount(username){
-            window.location='/account/'+username;
-            return false;
-    }
-
-    function likeImage(feedname,data){
-                //alert(feedname);
-                let flag=1;  
-                if($(data).val()=='dislike')
-                flag=0;
-
-
-                if($(data).val()=='like'){
-                    //$(data).html('dislike');
-                    $(data).attr('value',"dislike");
-                }
-                else{
-                    //$(data).html('like');
-                    $(data).attr('value',"like");
-                }
-                $.ajax({
-                    url: "/profile/postFeed/"+feedname+"/likeImage/"+flag, 
-                    type:"POST",
-                    timeout:500,
-                    //dataType:'json',
-                    success: function(){
-                        //
-                        alert(url);
-                        //alert('Liked!');
-                    },
-                    error:function(error){
-                        throw error;
-                    }
-                });
-    }
-
-     
-
-</script>
-</head>
-<body>
-    <div class="container">
-    <nav class="navbar navbar-default navbar-fixed-top navbar-inverse">
-                    <div class="container">
-                        <!-- Brand and toggle get grouped for better mobile display -->
-                        <div class="navbar-header">
-                            <button aria-expanded="false" class="navbar-toggle collapsed" data-target="#bs-example-navbar-collapse-1" data-toggle="collapse" type="button">
-                                <span class="sr-only">
-                                    Toggle navigation
-                                </span>
-                                <span class="icon-bar">
-                                </span>
-                                <span class="icon-bar">
-                                </span>
-                                <span class="icon-bar">
-                                </span>
-                            </button>
-                            <a class="navbar-brand" href="#">
-                                Brand
-                            </a>
-                        </div>
-                        <!-- Search Navbar -->
-                        <form class="navbar-form navbar-left search-container hidden-xs" role="search">
-                            <div class="form-group">
-                                <input class="form-control" placeholder="Search" type="text">
-                                </input>
-                            </div>
-                            <button class="btn btn-default btn-search" type="submit">
-                                <i aria-hidden="true" class="fa fa-search text-center">
-                                </i>
-                            </button>
-                        </form>
-                        <!--END Search navbar -->
-                        <!-- Collect the nav links, forms, and other content for toggling -->
-                        <div class="collapse navbar-collapse navbar-right" id="bs-example-navbar-collapse-1">
-                            <ul class="nav navbar-nav navbar-left">
-                                <!--Search xs -->
-                                <li class="visible-xs ">
-                                    <form class="navbar-form navbar-left search-xs" role="search">
-                                        <div class="form-group">
-                                            <input class="form-control" placeholder="Search" type="text">
-                                            </input>
-                                        </div>
-                                        <button class="btn btn-default search-btn-xs pull-right" type="submit">
-                                            Submit
-                                        </button>
-                                    </form>
-                                </li>
-                                <!-- END Search xs -->
-                                <li class="active">
-                                    <a href="#">
-                                        Home
-                                        <span class="sr-only">
-                                            (current)
-                                        </span>
-                                    </a>
-                                </li>
-                                <li>
-                                    <a href="#">
-                                        Profile
-                                    </a>
-                                </li>
-                                <li data-placement="bottom" data-toggle="tooltip" title="Friend requests">
-                                    <a href="">
-                                        <i aria-hidden="true" class="fa fa-user">
-                                        </i>
-                                    </a>
-                                </li>
-                                <li data-placement="bottom" data-toggle="tooltip" title="Messages">
-                                    <a href="">
-                                        <i aria-hidden="true" class="fa fa-envelope-o">
-                                        </i>
-                                    </a>
-                                </li>
-                                <li data-placement="bottom" data-toggle="tooltip" title="Notifications">
-                                    <a href="">
-                                        <i aria-hidden="true" class="fa fa-globe">
-                                        </i>
-                                    </a>
-                                </li>
-                                <li class="dropdown">
-                                    <a aria-expanded="false" aria-haspopup="true" class="dropdown-toggle" data-toggle="dropdown" href="#" role="button">
-                                        <i aria-hidden="true" class="fa fa-wrench">
-                                        </i>
-                                        <span class="caret">
-                                        </span>
-                                    </a>
-                                    <ul class="dropdown-menu">
-                                        <li>
-                                            <a href="config.html">
-                                                Configurations
-                                            </a>
-                                        </li>
-                                        <li>
-                                            <a href="#">
-                                                Another action
-                                            </a>
-                                        </li>
-                                        <li>
-                                            <a href="#">
-                                                Something else here
-                                            </a>
-                                        </li>
-                                        <li class="divider" role="separator">
-                                        </li>
-                                        <li>
-                                            <a href="#">
-                                                About
-                                            </a>
-                                        </li>
-                                        <li class="divider" role="separator">
-                                        </li>
-                                        <li>
-                                            <a data-target="#myModal" data-toggle="modal" href="#myModal">
-                                                <i aria-hidden="true" class="fa fa-sign-out">
-                                                </i>
-                                                Exit
-                                            </a>
-                                        </li>
-                                    </ul>
-                                </li>
-                            </ul>
-                        </div>
-                        <!-- /.navbar-collxapse -->
-                    </div>
-                    <!-- /.container-fluid -->
-                </nav>
-                <!-- Configuration Modal -->
-                <div class="modal fade" id="myModal" role="dialog" tabindex="-1">
-                    <div class="modal-dialog" role="document">
-                        <div class="modal-content">
-                            <div class="modal-header">
-                                <button aria-label="Close" class="close" data-dismiss="modal" type="button">
-                                    <span aria-hidden="true">
-                                        ×
-                                    </span>
-                                </button>
-                                <h4 class="modal-title">
-                                    <i aria-hidden="true" class="fa fa-sign-out">
-                                    </i>
-                                    Exit
-                                </h4>
-                            </div>
-                            <div class="modal-body">
-                                <p>
-                                    Are you sure you want to quit?
-                                </p>
-                            </div>
-                            <div class="modal-footer">
-                                <button class="btn btn-default" data-dismiss="modal" type="button">
-                                    Close
-                                </button>
-                                <button class="btn btn-primary" type="button">
-                                    Exit
-                                </button>
-                            </div>
-                        </div>
-                        <!-- /.modal-content -->
-                    </div>
-                    <!-- /.modal-dialog -->
-                </div>
-                <!-- Configuration modal -->
-    </div>
-    
-
-     
-    
-
-    <div id="load-feed">
-        <% for(var i=0; i < feedResult.length; i++) { %>
-            <label onclick="showAccount('<%=feedResult[i].username%>')"><%=feedResult[i].username%></label><br>
-            <img id="<%=feedResult[i].feedname%>" onclick="showFeed(this.id);return false;"  src="profilepics/<%=feedResult[i].feedname%>" height="500px" width="500px"><br>
-            <input type="button" id="like-btn-<%=feedResult[i].feedname%>" onclick="likeImage('<%=feedResult[i].feedname%>',this)" value="<%=feedResult[i].isliked%>" >
-            <button onclick="showFeed('<%=feedResult[i].feedname%>')">Comment</button>
-            <br><br>
-            &nbsp;&nbsp;&nbsp;&nbsp;
-        <% } %>
-    </div>
-    <script>
-        $('#search-user-form').submit(function(){
-        let username = $('#search-text').val();
-        //alert(username);
-        $(this).attr('action', "/account/" + username);
-        }); 
-    </script>
-</body>
-</html>
-
-
-
-<!--
-    HomePage!
-    <form id="homeForm" action="/login" method="GET">
-        <input type="submit" value="Logout">  
-    </form>
-
-    <form id="homeForm" action="/profile" method="GET">
-        <input type="submit" value="Profile">
-    </form>
--->
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-<!DOCTYPE html>
-<html lang="en">
-<head>
+    <link href="http://netdna.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" rel="stylesheet">
+    <meta charset="utf-8">
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -338,233 +16,283 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
 
-<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
-<script  type="text/javascript" src="../JS/typeahead.min.js"></script>
-<script src="http://code.jquery.com/jquery-1.10.2.min.js"></script>
-<script src="http://netdna.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
-<script src="https://use.fontawesome.com/cb2d0db4c2.js"></script>
-<script type="text/javascript">
-        $(document).ready(function(){
-            $('input.typeahead').typeahead({
-                name: 'countries',
-                remote: 'http://localhost:3000/profile/search?key=%QUERY',
-                limit: 10
+<title>
+    View Pic
+</title>
+</head>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script src="http://cdnjs.cloudflare.com/ajax/libs/jquery.form/3.51/jquery.form.min.js"></script>
+<script>
+$(document).ready(function(){
+    $('#likeImage').click(function(){
+            //alert('Hii');
+            let flag=1;  
+            if($('#likeImage').val()=='dislike')
+            flag=0;
+
+
+            if($('#likeImage').val()=='like'){
+                //$('#likeImage').html('dislike');
+                $('#likeImage').attr('value',"dislike");
+            }
+            else{
+                //$('#likeImage').html('like');
+                $('#likeImage').attr('value',"like");
+            }
+            $.ajax({
+                url: "/profile/postFeed/"+"<%=postId%>"+"/likeImage/"+flag, 
+                type:"POST",
+                timeout:500,
+                //dataType:'json',
+                success: function(){
+                    //
+                    alert('Liked!');
+                },
+                error:function(error){
+                    throw error;
+                }
             });
+        });
 
-            $('#likeImage').click(function(){
-                //alert('Hii');
-                let flag=1;  
-                if($('#likeImage').val()=='dislike')
-                flag=0;
-
-
-                if($('#likeImage').val()=='like'){
-                    //$('#likeImage').html('dislike');
-                    $('#likeImage').attr('value',"dislike");
+        $('#commentImage').click(function(){
+            $('#commentSection').toggle();
+            $('#loadComments').toggle();
+            /*if('<%= comments.length%>' > 3){
+                //alert('<%= comments.length%>');
+                $('#loadNextComments').toggle();
+            }*/
+            $('#postCommentForm').submit(function() {
+            //$("#status").empty().text("File is uploading...");
+            $(this).ajaxSubmit({
+                error: function(xhr) {
+                  alert("Error while posting comment 1");
+                status('Error: ' + xhr.status);
+                },
+                success: function(response) {
+                $("#status").empty().text(response);
+                alert("Error while posting comment 2");
+                    console.log(response);
                 }
-                else{
-                    //$('#likeImage').html('like');
-                    $('#likeImage').attr('value',"like");
-                }
-                $.ajax({
-                    url: "/profile/postFeed/"+1+"/likeImage/"+flag, 
-                    type:"POST",
-                    timeout:500,
-                    //dataType:'json',
-                    success: function(){
-                        //
-                        alert('Liked!');
-                    },
-                    error:function(error){
-                        throw error;
-                    }
-                });
             });
-            
-            /*$(window).scroll(function() {
-                if($(window).scrollTop() == $(document).height() - $(window).height()) {
-                // ajax call get data from server and append to the div
-                    ('#add-data').append('<li>Main<li>')
-                }
-            });*/
-    });
-    function showFeed(id){
-            window.location='/showfeed/'+id;
+            //Very important line, it disables the page refresh.
             return false;
-    }
+            });
+        });
+    });
 
     function showAccount(username){
-            window.location='/account/'+username;
-            return false;
+        window.location='/account/'+username;
+        return false;
     }
 
-    function likeImage(feedname,data){
-                //alert(feedname);
-                let flag=1;  
-                if($(data).val()=='dislike')
-                flag=0;
-
-
-                if($(data).val()=='like'){
-                    //$(data).html('dislike');
-                    $(data).attr('value',"dislike");
-                }
-                else{
-                    //$(data).html('like');
-                    $(data).attr('value',"like");
-                }
-                $.ajax({
-                    url: "/profile/postFeed/"+feedname+"/likeImage/"+flag, 
-                    type:"POST",
-                    timeout:500,
-                    //dataType:'json',
-                    success: function(){
-                        //
-                        alert(url);
-                        //alert('Liked!');
-                    },
-                    error:function(error){
-                        throw error;
-                    }
-                });
-    }
-
-     
-
+  
 </script>
+
+    
+    <style type="text/css">
+    	
+body{
+    margin-top:20px;
+    background-color: #ecf0f5;
+}
+.box-widget {
+    border: none;
+    position: relative;
+}
+.box {
+    position: relative;
+    border-radius: 3px;
+    background: #ffffff;
+    border-top: 3px solid #d2d6de;
+    margin-bottom: 20px;
+    width: 100%;
+    box-shadow: 0 1px 1px rgba(0,0,0,0.1);
+}
+.box-header.with-border {
+    border-bottom: 1px solid #f4f4f4;
+}
+.box-header {
+    color: #444;
+    display: block;
+    padding: 10px;
+    position: relative;
+}
+.user-block img {
+    width: 40px;
+    height: 40px;
+    float: left;
+}
+.user-block .username {
+    font-size: 16px;
+    font-weight: 600;
+}
+.user-block .description {
+    color: #999;
+    font-size: 13px;
+}
+.user-block .username, 
+.user-block .description, 
+.user-block .comment {
+    display: block;
+    margin-left: 50px;
+}
+.box-header>.box-tools {
+    position: absolute;
+    right: 10px;
+    top: 5px;
+}
+.btn-box-tool {
+    padding: 5px;
+    font-size: 12px;
+    background: transparent;
+    color: #97a0b3;
+}
+.box-body {
+    border-top-left-radius: 0;
+    border-top-right-radius: 0;
+    border-bottom-right-radius: 3px;
+    border-bottom-left-radius: 3px;
+    padding: 10px;
+}
+.pad {
+    padding: 10px;
+}
+.box .btn-default {
+    background-color: #f4f4f4;
+    color: #444;
+    border-color: #ddd;
+}
+.box-comments {
+    background: #f7f7f7 !important;
+}
+.box-footer {
+    border-top-left-radius: 0;
+    border-top-right-radius: 0;
+    border-bottom-right-radius: 3px;
+    border-bottom-left-radius: 3px;
+    border-top: 1px solid #f4f4f4;
+    padding: 10px;
+    background-color: #fff;
+}
+.box-comments .box-comment:first-of-type {
+    padding-top: 0;
+}
+.box-comments .box-comment {
+    padding: 8px 0;
+    border-bottom: 1px solid #eee;
+}
+.img-sm, 
+.box-comments .box-comment img, 
+.user-block.user-block-sm img {
+    width: 30px !important;
+    height: 30px !important;
+}
+.img-sm, .img-md, 
+.img-lg, .box-comments .box-comment img, 
+.user-block.user-block-sm img {
+    float: left;
+}
+.box-comments .comment-text {
+    margin-left: 40px;
+    color: #555;
+}
+.box-comments .username {
+    color: #444;
+    display: block;
+    font-weight: 600;
+}
+.box-comments .text-muted {
+    font-weight: 400;
+    font-size: 12px;
+}
+.img-sm+.img-push {
+    margin-left: 40px;
+}
+.box .form-control {
+    border-radius: 0;
+    box-shadow: none;
+    border-color: #d2d6de;
+}
+    </style>
 </head>
 <body>
-    <input type="text" id="search-text" class="typeahead tt-query" name="typeahead" autocomplete="off" spellcheck="false" placeholder="Type username">
 
-    <div class="container">
-    <nav class="navbar navbar-default navbar-fixed-top navbar-inverse">
-                    <div class="container">
-                        <!-- Brand and toggle get grouped for better mobile display -->
-                        <div class="navbar-header">
-                            <button aria-expanded="false" class="navbar-toggle collapsed" data-target="#bs-example-navbar-collapse-1" data-toggle="collapse" type="button">
-                                <span class="sr-only">
-                                    Toggle navigation
-                                </span>
-                                <span class="icon-bar">
-                                </span>
-                                <span class="icon-bar">
-                                </span>
-                                <span class="icon-bar">
-                                </span>
-                            </button>
-                            <a class="navbar-brand" href="#">
-                                Social-Network-Logo
-                            </a>
-                        </div>
-                        <!-- Search Navbar -->
-                        <form class="navbar-form navbar-left search-container hidden-xs" role="search">
-                            <div class="form-group">
-                                <!--<input class="form-control" placeholder="Search" type="text">
-                                </input>-->
-                                <input type="text" id="search-text" class="typeahead tt-query" name="typeahead" autocomplete="off" spellcheck="false" placeholder="Type username">
+<link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css" rel="stylesheet">
+<div class="container bootstrap snippets bootdey">
+<div class="col-md-8">
+  <div class="box box-widget">
+    <div class="box-header with-border">
+      <div class="user-block">
+        <img class="img-circle" src="https://bootdey.com/img/Content/avatar/avatar1.png" alt="User Image">
+        <span class="username"><a href="/account/<%=likeUserCreatedATCount.username%>"><%=likeUserCreatedATCount.username%></a></span>
+        <span class="description">Shared publicly - <%=likeUserCreatedATCount.created_at%></span>
+      </div>
+      <div class="box-tools"> 
+      <!--  <button type="button" class="btn btn-box-tool" data-toggle="tooltip" title="" data-original-title="Mark as read">
+        <i class="fa fa-circle-o"></i></button>
+        <button type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i>
+        </button>-->
+        <button type="button" class="btn btn-box-tool" data-widget="remove"><a href="/"><i class="fa fa-times"></i></button>
+      </div>
+    </div>
 
-                            </div>
-                            <button class="btn btn-default btn-search" type="submit">
-                                <i aria-hidden="true" class="fa fa-search text-center">
-                                </i>
-                            </button>
-                        </form>
-                        <!--END Search navbar -->
-                        <!-- Collect the nav links, forms, and other content for toggling -->
-                        <div class="collapse navbar-collapse navbar-right" id="bs-example-navbar-collapse-1">
-                            <ul class="nav navbar-nav navbar-left">
-                                <!--Search xs -->
-                                <li class="visible-xs ">
-                                    <form class="navbar-form navbar-left search-xs" role="search">
-                                        <div class="form-group">
-                                            <input class="form-control" placeholder="Search" type="text">
-                                            </input>
-                                        </div>
-                                        <button class="btn btn-default search-btn-xs pull-right" type="submit">
-                                            Submit
-                                        </button>
-                                    </form>
-                                </li>
-                                <!-- END Search xs -->
-                                <li class="active"><a href="/">Home</a></li>
-                                <li><a href="/profile">Profile</a></li>
-                                <li><a href="/login">Logout</a></li>
-                            </ul>
-                        </div>
-                        <!-- /.navbar-collxapse -->
-                    </div>
-                    <!-- /.container-fluid -->
-                </nav>
-                <!-- Configuration Modal -->
-                <div class="modal fade" id="myModal" role="dialog" tabindex="-1">
-                    <div class="modal-dialog" role="document">
-                        <div class="modal-content">
-                            <div class="modal-header">
-                                <button aria-label="Close" class="close" data-dismiss="modal" type="button">
-                                    <span aria-hidden="true">
-                                        ×
-                                    </span>
-                                </button>
-                                <h4 class="modal-title">
-                                    <i aria-hidden="true" class="fa fa-sign-out">
-                                    </i>
-                                    Exit
-                                </h4>
-                            </div>
-                            <div class="modal-body">
-                                <p>
-                                    Are you sure you want to quit?
-                                </p>
-                            </div>
-                            <div class="modal-footer">
-                                <button class="btn btn-default" data-dismiss="modal" type="button">
-                                    Close
-                                </button>
-                                <button class="btn btn-primary" type="button">
-                                    Exit
-                                </button>
-                            </div>
-                        </div>
-                        <!-- /.modal-content -->
-                    </div>
-                    <!-- /.modal-dialog -->
-                </div>
-                <!-- Configuration modal -->
+    <div class="box-body" style="display: block;">
+      <img class="img-responsive pad" src="/profilepics/<%=postId%>" alt="Photo">
+      <!--<p>CAPTION</p>
+      <button type="button" class="btn btn-default btn-xs"><i class="fa fa-share"></i> Share</button>
+      -->
+      <input type="button" class="btn btn-default btn-sm" id="likeImage" value="<%=initialLikedDisliked%>" name="likeImage"><i class="fa fa-thumbs-o-up"></i> <%=initialLikedDisliked%>
+      <span class="pull-right text-muted"><%=likeUserCreatedATCount.likes%> likes - <%=comments.length%> comments</span>
     </div>
     
+    <div class="box-footer box-comments" style="display: block;">
+        <% for (let i=0;i < comments.length ;i++) { %>
+      
+        <div class="box-comment">
+        <img class="img-circle img-sm" src="https://bootdey.com/img/Content/avatar/avatar2.png" alt="User Image">
+        <div class="comment-text">
+          <span class="username"><a class="username" style="color:royalblue;" href="/account/<%= comments[i].commentby %>">
+            <%= comments[i].commentby %></a>
+          <span class="text-muted pull-right"><%=comments[i].created_at%></span>
+          </span>
+          <%= comments[i].commenttext %>
+        </div>
+      </div>
 
-     
-    
+      <% } %>
 
-    <div id="load-feed">
-        <% for(var i=0; i < feedResult.length; i++) { %>
-            <label onclick="showAccount('<%=feedResult[i].username%>')"><%=feedResult[i].username%></label><br>
-            <img id="<%=feedResult[i].feedname%>" onclick="showFeed(this.id);return false;"  src="profilepics/<%=feedResult[i].feedname%>" height="500px" width="500px"><br>
-            <input type="button" id="like-btn-<%=feedResult[i].feedname%>" onclick="likeImage('<%=feedResult[i].feedname%>',this)" value="<%=feedResult[i].isliked%>" >
-            <button onclick="showFeed('<%=feedResult[i].feedname%>')">Comment</button>
-            <br><br>
-            &nbsp;&nbsp;&nbsp;&nbsp;
-        <% } %>
+      <!--
+      <div class="box-comment">
+        <img class="img-circle img-sm" src="https://bootdey.com/img/Content/avatar/avatar3.png" alt="User Image">
+        <div class="comment-text">
+          <span class="username">
+          Luna Stark
+          <span class="text-muted pull-right">8:03 PM Today</span>
+          </span>
+          It is a long established fact that a reader will be distracted
+          by the readable content of a page when looking at its layout.
+        </div>
+      </div>
+        -->
     </div>
-    <script>
-        $('#search-user-form').submit(function(){
-        let username = $('#search-text').val();
-        //alert(username);
-        $(this).attr('action', "/account/" + username);
-        }); 
-    </script>
+    
+    <div class="box-footer" style="display: block;">
+      <form id="postCommentForm" action="/profile/postFeed/<%=postId%>/comment" method="POST" >
+        <img class="img-responsive img-circle img-sm" src="https://bootdey.com/img/Content/avatar/avatar1.png" alt="Alt Text">
+        <div class="img-push">
+          <input class="form-control input-sm" type="text" autocomplete="off" name="commentText" placeholder="Comment here...">
+          <button type="submit" name="postComment" value="Post" class="btn btn-default btn-sm">Post</button>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
+</div>
+<script src="http://code.jquery.com/jquery-1.10.2.min.js"></script>
+<script src="http://netdna.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
+<script type="text/javascript">
+	
+
+</script>
 </body>
 </html>
-
-
-
-<!--
-    HomePage!
-    <form id="homeForm" action="/login" method="GET">
-        <input type="submit" value="Logout">  
-    </form>
-
-    <form id="homeForm" action="/profile" method="GET">
-        <input type="submit" value="Profile">
-    </form>
--->
