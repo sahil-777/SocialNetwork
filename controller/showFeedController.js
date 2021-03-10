@@ -26,11 +26,11 @@ class showFeedController{
                         console.log('\n');    
                         comments[i].commentby=req.session.username;
                     }*/
-                    let likeCountQuery="SELECT likes FROM userfeed WHERE feedname='"+req.params['id']+"'";
-                    connection.query(likeCountQuery,(error,likeCount)=>{
+                    let likeCountQuery="SELECT likes,username,created_at FROM userfeed WHERE feedname='"+req.params['id']+"'";
+                    connection.query(likeCountQuery,(error,likeUserCreatedATCount)=>{
                         if(error) throw error;
-                        console.log(likeCount[0]);
-                        return res.render('showFeedView',{ likeCount:likeCount[0],postId:req.params['id'],initialLikedDisliked:initialLikedDisliked,comments:comments});  
+                        console.log(likeUserCreatedATCount[0]);
+                        return res.render('showFeedView',{ likeUserCreatedATCount:likeUserCreatedATCount[0],postId:req.params['id'],initialLikedDisliked:initialLikedDisliked,comments:comments});  
                     })
                 });
             });
@@ -109,8 +109,11 @@ class showFeedController{
         let sqlQuery="INSERT INTO commentinfo SET ? ";
         connection.query(sqlQuery,commentData,(error,result)=>{
             if(error) throw error;
+            console.log(commentData);
+            return res.redirect('/showfeed/'+commentData.feedname);
         });
-    
+        return res.redirect('/showfeed/'+commentData.feedname);
+
     };
 }
 module.exports = showFeedController;

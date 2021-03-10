@@ -7,3 +7,4 @@ views/tempView.ejs
 uploads/profilepics
 tempServer.js
 .env
+views/testinghtml.html
