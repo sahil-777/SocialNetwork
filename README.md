@@ -27,9 +27,28 @@
 
 ## Screenshots <a name = "Screenshots"></a>
 
-- Login Page
-
+- Login Page (_Signup Page is similar_)
 <img src="screenshots/cropped/Login Page.png" alt="Login Page">
+
+
+- Profile Page
+<img src="screenshots/cropped/Third Person's Profile.png" alt="Profile Page">
+
+
+- Home(Feed) Page
+<img src="screenshots/cropped/Home Page - 2.png" alt="Home (Feed) Page">
+
+
+- Like-Comments Page
+<img src="screenshots/cropped/Show Feed 2.png" alt="Like Comments Page">
+
+
+- Search-Box
+<img src="screenshots/cropped/search-box 2.png" alt="Search-Box">
+
+
+- Edit Profile Page
+<img src="screenshots/cropped/Edit Profile.png" alt="Edit Profile Page">
 
 ## Installing
 - [NodeJS](https://nodejs.org/en/) - Install NodeJS
