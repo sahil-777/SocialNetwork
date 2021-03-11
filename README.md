@@ -32,7 +32,7 @@
 
 
 - Profile Page
-<img src="" alt="Profile Page">
+<img src="screenshots/cropped/Third Person's Profile.png" alt="Profile Page">
 
 
 - Home(Feed) Page
