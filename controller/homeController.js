@@ -1,26 +1,29 @@
 const connection = require('../config');
 const Model = require('../model/homeModel');
 const homeModel = new Model();
-
+const moment = require('moment');
 class homeController{
     displayPage (req,res){
         //console.log(req.session.num);
         if(req.session.num!=null && typeof req.session.num!="undefined"){//If user has logged in
             console.log("LoggedIn "+req.session.num);
-            let feedQuery="SELECT followinfo.following AS username,userfeed.feedname AS feedname FROM userfeed INNER JOIN followinfo "+ 
+            //followinfo.following AS username,userfeed.feedname AS feedname
+            let feedQuery="SELECT * FROM userfeed INNER JOIN followinfo "+ 
              " ON userfeed.username = followinfo.following WHERE followinfo.follower= '"+req.session.username+"' ORDER BY created_at DESC"; 
             //WHERE userid!="+req.session.num;
             //console.log(feedQuery);
              connection.query(feedQuery,(error,feedResult)=>{
                 if(error) throw error;
+                console.log(feedResult);
                 if(feedResult.length==0)
-                return res.render('homeView',{feedResult:feedResult});
+                return res.render('homeView',{moment:moment,feedResult:feedResult});
                 for(let i=0;i<feedResult.length;i++){
                     let fdname=feedResult[i].feedname;
                     let userId=req.session.num;
                     //console.log(req.body)
                     //feedname+="1";
                     let isLikedQuery="SELECT EXISTS(SELECT 1 FROM likeinfo WHERE (feedname = '"+fdname+"' AND likedby = '"+userId+"') LIMIT 1)"
+                    
                     connection.query(isLikedQuery,(error,isLikedResult)=>{
                         if(error) throw error;
                         let R=JSON.stringify(isLikedResult[0]);
@@ -33,7 +36,7 @@ class homeController{
                         console.log(feedResult[i]);
                         
                         if(i==feedResult.length-1){
-                            return res.render('homeView',{feedResult:feedResult});
+                            return res.render('homeView',{moment:moment,feedResult:feedResult});
                         }
                     });
                 }
