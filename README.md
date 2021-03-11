@@ -27,9 +27,9 @@
 
 ## Screenshots <a name = "Screenshots"></a>
 
-- Yet to be added
+- Login Page
 
-<img src="" alt="Screenshot">
+<img src="screenshots/cropped/Login Page.png" alt="Login Page">
 
 ## Installing
 - [NodeJS](https://nodejs.org/en/) - Install NodeJS
