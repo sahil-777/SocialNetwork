@@ -19,7 +19,19 @@
 - [BootStrap 4](https://getbootstrap.com/) - Library
 - [AJAX](https://jquery.com/) - Sending async request
 
-### Installing
+
+## ER Diagram <a name = "ER"></a>
+
+    System Architecture
+     Yet to be added
+
+## Screenshots <a name = "Screenshots"></a>
+
+- Yet to be added
+
+<img src="" alt="Screenshot">
+
+## Installing
 - [NodeJS](https://nodejs.org/en/) - Install NodeJS
 
       npm modules
@@ -40,20 +52,7 @@
       - yet to be added
     => yet to be added
 
-# Documentation
-
-### ER Diagram <a name = "ER"></a>
-
-    System Architecture
-     Yet to be added
-
-# Screenshots <a name = "Screenshots"></a>
-
-- Yet to be added
-
-<img src="" alt="Screenshot">
-
-# Features:
+## Features:
 
     Registration and Login 
         • User will have to register themselves by providing basic information about them and then they can login into the system. 
@@ -74,7 +73,7 @@
         => Search Bar: 
             User can find other people. 
 
-# 5. Functionality
+## 5. Functionality
     ❖ Registration
     ❖ Login
     ❖ Update your profile picture and personal details 
