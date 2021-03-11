@@ -1,6 +1,7 @@
+<p align="center">
+<img src="uploads/assets/images/icons8-share.svg" alt="SocialNetwork Project Logo" height="160px" >
+</p>
 <h1 align="center"><b>Social Network</b></h1>
- 
-
 <p align="center">  A social media platform where people can post pics and connect with other members
     <br> 
 </p>
@@ -19,12 +20,12 @@
 - [BootStrap 4](https://getbootstrap.com/) - Library
 - [AJAX](https://jquery.com/) - Sending async request
 
-
+<!--
 ## ER Diagram <a name = "ER"></a>
 
     System Architecture
      Yet to be added
-
+-->
 ## Screenshots <a name = "Screenshots"></a>
 
 - Login Page (_Signup Page is similar_)
@@ -65,12 +66,12 @@
           "multer": "^1.4.2",
           "mysql": "^2.18.1"
  
-
+<!--
 ## Project Structure <a name = "getting_started"></a>
     => yet to be added
       - yet to be added
     => yet to be added
-
+-->
 ## Features:
 
     Registration and Login 
