@@ -33,7 +33,7 @@ class showFeedController{
                     connection.query(likeCountQuery,(error,likeUserCreatedATCount)=>{
                         if(error) throw error;
                         console.log(likeUserCreatedATCount[0]);
-                        let feedCreaterQuery="SELECT profilepic FROM userinfo WHERE username='"+req.session.username+"'";
+                        let feedCreaterQuery="SELECT profilepic FROM userinfo WHERE username='"+likeUserCreatedATCount[0].username+"'";
                         connection.query(feedCreaterQuery,(error,profilePicResult)=>{
                             if(error) throw error;
                             //console.log(profilePicResult[0]);
