@@ -20,12 +20,13 @@
 - [BootStrap 4](https://getbootstrap.com/) - Library
 - [AJAX](https://jquery.com/) - Sending async request
 
-<!--
+
 ## ER Diagram <a name = "ER"></a>
 
     System Architecture
-     Yet to be added
--->
+    
+   <img src="uploads/assets/images/ER Diagram.png" alt="ER Diagram">
+    
 ## Screenshots <a name = "Screenshots"></a>
 
 - Login Page (_Signup Page is similar_)
